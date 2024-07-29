@@ -4,7 +4,7 @@ const fs = require('fs');
 
 exports.handler = async function(event, context) {
     try {
-        const filePath = path.resolve(__dirname, '..', 'public', 'Conditions Générales - Nicolas BALLU.pdf');
+        const filePath = path.resolve(__dirname, '..', 'public', 'conditions_generales_nicolas_ballu.pdf');
         console.log('Resolved file path:', filePath);
 
         // Vérifiez si le fichier existe réellement
@@ -30,7 +30,7 @@ exports.handler = async function(event, context) {
             subject: 'Test Email',
             text: 'This is a test email sent from Node.js using Nodemailer.',
             attachments: [{
-                filename: 'Conditions Générales - Nicolas BALLU.pdf',
+                filename: 'conditions_generales_nicolas_ballu.pdf',
                 path: filePath,
                 contentType: 'application/pdf'
             }]
