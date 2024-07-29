@@ -18,7 +18,7 @@ exports.handler = async function(event, context) {
             text: 'This is a test email sent from Node.js using Nodemailer.',
             attachments: [{
                 filename: 'Conditions Générales - Nicolas BALLU.pdf',
-                path: path.resolve(__dirname, 'Conditions Générales - Nicolas BALLU.pdf'), // Changez le chemin ici
+                path: path.resolve(__dirname, 'Conditions Générales - Nicolas BALLU.pdf'),
                 contentType: 'application/pdf'
             }]
         };
