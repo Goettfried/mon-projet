@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #006400;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1, header h2, header p {
+    margin: 10px 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.buttons button {
+    background-color: #006400;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.buttons button:hover {
+    background-color: #004d00;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #006400;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #004d00;
+}
+
+.services {
+    text-align: center;
+}
+
+.services h2 {
+    color: #006400;
+}
+
+.service {
+    margin: 20px 0;
+}
+
+.service img {
+    max-width: 100%;
+    border-radius: 8px;
+    filter: sepia(20%) saturate(50%) hue-rotate(85deg);
+    transition: filter 0.3s;
+}
+
+.service img:hover {
+    filter: sepia(20%) saturate(50%) hue-rotate(85deg) brightness(1.1);
+}
+
+.testimonials {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 20px 0;
+}
+
+.testimonials h2 {
+    color: #006400;
+}
+
+.testimonial {
+    margin: 10px 0;
+}
+
+.audio-control {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.audio-control button {
+    background-color: #8A2BE2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.audio-control button:hover {
+    background-color: #7A1BE2;
+}
+
+footer {
+    background-color: #006400;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.social-media {
+    margin: 20px 0;
+}
+
+.social-media img {
+    width: 40px;
+    height: 40px;
+}
