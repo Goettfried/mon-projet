@@ -1,20 +1,9 @@
 const nodemailer = require('nodemailer');
-const path = require('path');
-const fs = require('fs');
 
 exports.handler = async function(event, context) {
     try {
-        const filePath = path.resolve(__dirname, '..', 'public', 'conditions_generales_nicolas_ballu.pdf');
-        console.log('Resolved file path:', filePath);
-
-        // Vérifiez si le fichier existe réellement
-        if (!fs.existsSync(filePath)) {
-            console.error(`Le fichier n'existe pas: ${filePath}`);
-            return {
-                statusCode: 404,
-                body: JSON.stringify({ error: 'File not found: ' + filePath })
-            };
-        }
+        // URL publique vers le fichier PDF
+        const pdfUrl = `${process.env.SITE_URL}/conditions_generales_nicolas_ballu.pdf`;
 
         let transporter = nodemailer.createTransport({
             service: process.env.EMAIL_SERVICE,
@@ -28,12 +17,8 @@ exports.handler = async function(event, context) {
             from: process.env.EMAIL_USER,
             to: 'rhsmart.ballu@gmail.com',
             subject: 'Test Email',
-            text: 'This is a test email sent from Node.js using Nodemailer.',
-            attachments: [{
-                filename: 'conditions_generales_nicolas_ballu.pdf',
-                path: filePath,
-                contentType: 'application/pdf'
-            }]
+            text: `This is a test email sent from Node.js using Nodemailer. You can download the PDF using this link: ${pdfUrl}`,
+            html: `<p>This is a test email sent from Node.js using Nodemailer. You can download the PDF using this link: <a href="${pdfUrl}">Download PDF</a></p>`
         };
 
         let info = await transporter.sendMail(mailOptions);
