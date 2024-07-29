@@ -4,7 +4,7 @@ const fs = require('fs');
 
 exports.handler = async function(event, context) {
     try {
-        const filePath = path.resolve(__dirname, '..', 'public', 'Conditions Générales - Nicolas BALLU.pdf');
+        const filePath = path.resolve(__dirname, 'Conditions Générales - Nicolas BALLU.pdf');
         console.log('Resolved file path:', filePath);
 
         // Vérifiez si le fichier existe réellement
