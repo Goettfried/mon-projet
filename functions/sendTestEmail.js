@@ -9,7 +9,11 @@ exports.handler = async function(event, context) {
 
         // Vérifiez si le fichier existe réellement
         if (!fs.existsSync(filePath)) {
-            throw new Error(`Le fichier n'existe pas: ${filePath}`);
+            console.error(`Le fichier n'existe pas: ${filePath}`);
+            return {
+                statusCode: 404,
+                body: JSON.stringify({ error: 'File not found: ' + filePath })
+            };
         }
 
         let transporter = nodemailer.createTransport({
