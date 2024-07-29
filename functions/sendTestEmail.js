@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer');
 const path = require('path');
-const fs = require('fs');
 
 exports.handler = async function(event, context) {
     try {
@@ -12,14 +11,6 @@ exports.handler = async function(event, context) {
             }
         });
 
-        // Construire le chemin absolu du fichier PDF
-        const pdfPath = path.join(__dirname, 'Conditions Générales - Nicolas BALLU.pdf');
-
-        // Vérifiez si le fichier existe
-        if (!fs.existsSync(pdfPath)) {
-            throw new Error(`Le fichier PDF est introuvable : ${pdfPath}`);
-        }
-
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: 'rhsmart.ballu@gmail.com',
@@ -27,7 +18,7 @@ exports.handler = async function(event, context) {
             text: 'This is a test email sent from Node.js using Nodemailer.',
             attachments: [{
                 filename: 'Conditions Générales - Nicolas BALLU.pdf',
-                path: pdfPath,
+                path: path.resolve(__dirname, '..', 'public', 'Conditions Générales - Nicolas BALLU.pdf'),
                 contentType: 'application/pdf'
             }]
         };
