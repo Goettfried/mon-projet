@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-const fs = require('fs');
 const path = require('path');
 
 exports.handler = async function(event, context) {
@@ -19,7 +18,7 @@ exports.handler = async function(event, context) {
             text: 'This is a test email sent from Node.js using Nodemailer.',
             attachments: [{
                 filename: 'Conditions Générales - Nicolas BALLU.pdf',
-                path: path.resolve(__dirname, '../public', 'Conditions Générales - Nicolas BALLU.pdf'),
+                path: path.resolve(__dirname, 'Conditions Générales - Nicolas BALLU.pdf'), // Changez le chemin ici
                 contentType: 'application/pdf'
             }]
         };
