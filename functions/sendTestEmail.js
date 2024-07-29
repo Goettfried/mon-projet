@@ -4,9 +4,6 @@ const path = require('path');
 
 exports.handler = async function(event, context) {
     try {
-        // Extraction des données du formulaire à partir de l'événement
-        const { name, email, message } = JSON.parse(event.body);
-
         let transporter = nodemailer.createTransport({
             service: process.env.EMAIL_SERVICE,
             auth: {
@@ -17,12 +14,12 @@ exports.handler = async function(event, context) {
 
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: email, // Utilisez l'email fourni dans le formulaire
-            subject: `Nouveau message de ${name}`,
-            text: `Vous avez reçu un nouveau message de ${name} (${email}):\n\n${message}`,
+            to: 'rhsmart.ballu@gmail.com',
+            subject: 'Test Email',
+            text: 'This is a test email sent from Node.js using Nodemailer.',
             attachments: [{
                 filename: 'Conditions Générales - Nicolas BALLU.pdf',
-                path: path.join(__dirname, '..', '..', 'public', 'Conditions Générales - Nicolas BALLU.pdf'),
+                path: path.resolve(__dirname, '../public', 'Conditions Générales - Nicolas BALLU.pdf'),
                 contentType: 'application/pdf'
             }]
         };
