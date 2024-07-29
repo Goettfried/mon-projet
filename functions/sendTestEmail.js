@@ -1,7 +1,17 @@
 const nodemailer = require('nodemailer');
+const path = require('path');
+const fs = require('fs');
 
 exports.handler = async function(event, context) {
     try {
+        const filePath = path.resolve(__dirname, 'Conditions Générales - Nicolas BALLU.pdf');
+        console.log('Resolved file path:', filePath);
+
+        // Vérifiez si le fichier existe réellement
+        if (!fs.existsSync(filePath)) {
+            throw new Error(`Le fichier n'existe pas: ${filePath}`);
+        }
+
         let transporter = nodemailer.createTransport({
             service: process.env.EMAIL_SERVICE,
             auth: {
@@ -14,7 +24,12 @@ exports.handler = async function(event, context) {
             from: process.env.EMAIL_USER,
             to: 'rhsmart.ballu@gmail.com',
             subject: 'Test Email',
-            text: 'This is a test email sent from Node.js using Nodemailer without attachments.'
+            text: 'This is a test email sent from Node.js using Nodemailer.',
+            attachments: [{
+                filename: 'Conditions Générales - Nicolas BALLU.pdf',
+                path: filePath,
+                contentType: 'application/pdf'
+            }]
         };
 
         let info = await transporter.sendMail(mailOptions);
