@@ -1,48 +1,79 @@
-const nodemailer = require('nodemailer');
-const path = require('path');
-const fs = require('fs');
-
-exports.handler = async function(event, context) {
-    try {
-        const filePath = path.resolve(__dirname, '..', 'public', 'Conditions Générales - Nicolas BALLU.pdf');
-        console.log('Resolved file path:', filePath);
-
-        // Vérifiez si le fichier existe réellement
-        if (!fs.existsSync(filePath)) {
-            throw new Error(`Le fichier n'existe pas: ${filePath}`);
-        }
-
-        let transporter = nodemailer.createTransport({
-            service: process.env.EMAIL_SERVICE,
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS
-            }
-        });
-
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: 'rhsmart.ballu@gmail.com',
-            subject: 'Test Email',
-            text: 'This is a test email sent from Node.js using Nodemailer.',
-            attachments: [{
-                filename: 'Conditions Générales - Nicolas BALLU.pdf',
-                path: filePath,
-                contentType: 'application/pdf'
-            }]
-        };
-
-        let info = await transporter.sendMail(mailOptions);
-        console.log('Email sent: ' + info.response);
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ message: 'Email sent successfully' })
-        };
-    } catch (error) {
-        console.error('Error sending email:', error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Error sending email: ' + error.message })
-        };
-    }
-};
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicolas Ballu - Recrutement</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Nicolas BALLU</h1>
+        <h2>Spécialiste du Recrutement Indépendant (S.R.I.)</h2>
+        <p>Je suis Nicolas Ballu, S.R.I. au bénéfice de <strong>deux ans d’expérience</strong> en <strong>Suisse Romande 🇨🇭</strong></p>
+        <p><strong>"Je connais bien Vaud, j'habite en Chablais.</strong> J’ai eu le privilège et la joie de me distinguer dans le secteur du <strong>bâtiment et de l'industrie</strong>, notamment dans le <strong>recrutement de cadres techniques</strong>. Marqué par une approche <strong>entrepreneuriale</strong>, je gère de manière autonome la création et le développement de <strong>portefeuilles clients</strong> tout en m’appliquant à maintenir l'<strong>engagement fort</strong> rendant le mieux compte des <strong>aspects sociaux du recrutement</strong>, autrement, je ne serais qu'un placeur comme les autres."</p>
+        <p>Mon but💡: <strong>Optimiser la communication entre les entreprises et les talents exceptionnels</strong>, par le prisme du <strong>placement de personnel privé</strong>, de la <strong>location de services</strong> et de la <strong>médiation sociale</strong> pour rétablir le dialogue, particulièrement appréciable en temps de crise. Mes clients référents sont typiquement des bureaux d'ingénieurs-conseils/bureaux d'études et des entreprises vaudoises, genevoises, fribourgeoises et valaisannes spécialisées dans la production, la distribution et la commercialisation d'électricité, ainsi que dans le développement de solutions énergétiques durables et innovantes. Ils ont choisi de se donner corps et âme à la transition énergétique et de s’acharner à nous obtenir l'efficience énergétique, oui, pour vous et moi : le contribuable ; en faveur de notre avenir à tous, du mien, et du vôtre.</p>
+        <p>Je propose des prestations de <strong>placement de personnel fixe et temporaire</strong>, quelque soit votre secteur. Vous aurez l’occasion de me communiquer votre besoin en cliquant sur l’un de ces deux onglets.</p>
+        <p>Au plaisir de vous accompagner dans votre quête !</p>
+    </header>
+    <main>
+        <section class="buttons">
+            <button id="showWork" onclick="showForm('work')">Je recherche du travail</button>
+            <button id="showStaff" onclick="showForm('staff')">Je recherche du personnel</button>
+        </section>
+        <section id="form-container" style="display: none;">
+            <form id="contact-form" data-type="">
+                <label for="name">Nom:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Envoyer</button>
+            </form>
+        </section>
+        <section class="services" id="services">
+            <h2>Nos Services</h2>
+            <div class="service">
+                <img src="images/20240221_152031.jpg" alt="Placement de personnel fixe">
+                <h3>Placement de personnel fixe</h3>
+                <p>Nous trouvons le bon candidat pour vos besoins spécifiques.</p>
+            </div>
+            <div class="service">
+                <img src="images/20240217_082717.jpg" alt="Location de services">
+                <h3>Location de services</h3>
+                <p>Solutions flexibles pour vos besoins temporaires.</p>
+            </div>
+        </section>
+        <section class="testimonials">
+            <h2>Témoignages</h2>
+            <div class="testimonial">
+                <p>"C'est la première fois que je me suis senti compris et apprécié à ma juste valeur dans une entreprise et c'est grâce à vous." - H.S.</p>
+            </div>
+            <div class="testimonial">
+                <p>"Encore merci pour votre investissement." - D.S.</p>
+            </div>
+            <div class="testimonial">
+                <p>"Au plaisir d'avoir travaillé avec toi et je pense que l'on va se revoir." - G.C.</p>
+            </div>
+            <div class="testimonial">
+                <p>"Je tiens à vous exprimer ma sincère gratitude. Je vous remercie encore pour cette opportunité et je suis impatient de commencer ce nouveau chapitre." - A.A.</p>
+            </div>
+        </section>
+        <section class="audio-control">
+            <button onclick="playMusic()">🎵 Écouter de la musique</button>
+            <audio id="background-music" src="music/bert_kaempfert.mp3" loop></audio>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Nicolas Ballu</p>
+        <div class="social-media">
+            <a href="https://www.linkedin.com/in/baal-nicolas/">
+                <img src="images/image (44).png" alt="LinkedIn">
+                <span style="display:block; font-size:12px; color:#006400;">Cliquez ici !</span>
+            </a>
+        </div>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>

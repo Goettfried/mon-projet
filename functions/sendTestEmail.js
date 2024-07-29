@@ -6,7 +6,7 @@ exports.handler = async function(event, context) {
     try {
         const filePath = path.resolve(__dirname, '..', 'public', 'Conditions Générales - Nicolas BALLU.pdf');
         console.log('Resolved file path:', filePath);
-        
+
         // Vérifiez si le fichier existe réellement
         if (!fs.existsSync(filePath)) {
             throw new Error(`Le fichier n'existe pas: ${filePath}`);
