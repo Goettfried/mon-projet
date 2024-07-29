@@ -9,7 +9,6 @@ exports.handler = async function(event, context) {
 
         // Vérifiez si le fichier existe réellement
         if (!fs.existsSync(filePath)) {
-            console.error(`Le fichier n'existe pas: ${filePath}`);
             throw new Error(`Le fichier n'existe pas: ${filePath}`);
         }
 
