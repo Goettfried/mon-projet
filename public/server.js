@@ -1,15 +1,14 @@
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
-const sendEmail = require('./functions/sendTestEmail');
 const helmet = require('helmet');
-const xss = require('xss-clean');
-const { check, validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');
+const sendEmail = require('./sendTestEmail');
 
 const app = express();
 
+// Sécurité
 app.use(helmet());
-app.use(xss());
 
 // Limitation de taux
 const limiter = rateLimit({
@@ -22,10 +21,13 @@ app.use('/api/', limiter); // Appliquer la limitation de taux uniquement à l'AP
 
 app.use(bodyParser.json());
 
+// Endpoint d'envoi d'email avec validation
 app.post('/api/send-email', [
-  check('name').not().isEmpty().withMessage('Le nom est requis'),
-  check('email').isEmail().withMessage("L'email doit être valide"),
-  check('message').not().isEmpty().withMessage('Le message est requis')
+  body('name').trim().notEmpty().withMessage('Le nom est requis.'),
+  body('email').isEmail().withMessage('Email invalide.'),
+  body('phone').optional().isMobilePhone().withMessage('Numéro de téléphone invalide.'),
+  body('message').trim().notEmpty().withMessage('Le message est requis.'),
+  body('type').trim().notEmpty().withMessage('Le type est requis.')
 ], (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
