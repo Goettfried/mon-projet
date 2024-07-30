@@ -1,155 +1,126 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 header {
-    background-color: #005a00;
+    background-color: #008000;
     color: white;
     padding: 20px;
     text-align: center;
 }
 
-header .buttons {
-    margin-top: 20px;
+header h1, header h2 {
+    margin: 0;
 }
 
-header .buttons button {
-    background-color: #007b00;
+header p {
+    margin: 10px 0;
+}
+
+.buttons {
+    background-color: #4CAF50;
     color: white;
+    padding: 15px 20px;
+    margin: 10px 5px;
     border: none;
-    padding: 10px 20px;
-    margin: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
 }
 
-header .buttons button:hover {
-    background-color: #005a00;
-    transform: scale(1.1);
+.buttons:hover {
+    background-color: #45a049;
 }
 
-#services, #testimonials {
-    padding: 20px;
-    text-align: center;
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
-}
-
-#services .service, #testimonials blockquote {
-    margin: 20px 0;
-}
-
-#services .service img {
-    filter: sepia(0.5) hue-rotate(270deg);
-    transition: filter 0.3s;
-}
-
-#services .service img:hover {
-    filter: sepia(1) hue-rotate(0deg);
-}
-
-footer {
-    background-color: #005a00;
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
-
-footer img {
-    width: 20px;
-    vertical-align: middle;
-}
-
-#contact-form {
+#form-container {
+    background-color: rgba(0, 0, 0, 0.8);
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
     padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
 
-#contact-form.hidden {
-    display: none;
-}
-
-#contact-form form {
+form {
     display: flex;
     flex-direction: column;
 }
 
-#contact-form form label,
-#contact-form form input,
-#contact-form form textarea {
-    margin: 10px 0;
-}
-
-#contact-form form button {
-    background-color: #007b00;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+form label {
     margin-top: 10px;
-    transition: background-color 0.3s;
 }
 
-#contact-form form button[type="button"] {
-    background-color: #d9534f;
-}
-
-#contact-form form button:hover {
-    background-color: #005a00;
-}
-
-#contact-form form button[type="button"]:hover {
-    background-color: #c9302c;
-}
-
-#contact-form #form-success {
-    display: none;
-}
-
-#contact-form #form-success.hidden {
-    display: none;
-}
-
-#contact-form #form-success p {
-    color: green;
-}
-
-#contact-form #form-success button {
-    background-color: #007b00;
-    color: white;
-    border: none;
+form input, form textarea {
     padding: 10px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-#music-button {
-    background-color: #007b00;
-    color: white;
+form button {
+    margin-top: 10px;
+    padding: 10px;
     border: none;
-    padding: 10px 20px;
-    margin: 20px;
+    border-radius: 4px;
     cursor: pointer;
-    display: inline-block;
+}
+
+form button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+form button[type="button"] {
+    background-color: #f44336;
+    color: white;
+}
+
+.services, .testimonials {
+    padding: 20px;
     text-align: center;
 }
 
-#music-button:hover {
-    background-color: #005a00;
+.services h2, .testimonials h2 {
+    margin-top: 0;
+}
+
+.service, .testimonial {
+    margin: 20px 0;
+}
+
+footer {
+    background-color: #008000;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.linkedin-icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+audio {
+    display: none;
 }
