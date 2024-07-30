@@ -85,4 +85,12 @@ window.addEventListener('DOMContentLoaded', function() {
             button.style.transform = 'scale(1)';
         });
     });
+
+    // Rétraction du formulaire au clic en dehors de celui-ci
+    window.addEventListener('click', function(event) {
+        if (!formContainer.contains(event.target) && !event.target.matches('.buttons')) {
+            formContainer.style.display = 'none';
+            contactForm.reset();
+        }
+    });
 });
