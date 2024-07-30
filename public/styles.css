@@ -54,13 +54,23 @@ header {
     border-radius: 5px;
 }
 
-#form-container button[type="submit"] {
+#form-container button[type="submit"],
+#form-container button[type="button"] {
     background-color: #006400;
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 10px;
+}
+
+#form-container button[type="button"] {
+    background-color: #8B0000; /* Red background for cancel button */
+}
+
+#form-container textarea {
+    resize: none; /* Disable resizing */
 }
 
 .service {

@@ -31,6 +31,7 @@
                 <textarea id="message" name="message" required></textarea>
                 <input type="hidden" id="choice" name="choice">
                 <button type="submit">Envoyer</button>
+                <button type="button" onclick="hideForm()">Annuler</button>
             </form>
         </section>
         <section class="services" id="services">
@@ -81,6 +82,10 @@
             document.getElementById('choice').value = choice;
         }
 
+        function hideForm() {
+            document.getElementById('form-container').style.display = 'none';
+        }
+
         document.getElementById('contact-form').addEventListener('submit', async function(event) {
             event.preventDefault();
 
@@ -96,6 +101,7 @@
             const result = await response.json();
             if (response.ok) {
                 alert('Email envoyé avec succès !');
+                hideForm(); // Hide the form after submission
             } else {
                 alert('Erreur lors de l\'envoi de l\'email : ' + result.error);
             }
