@@ -1,126 +1,112 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #004d00;
-    color: #ffffff;
+    line-height: 1.6;
+    background: linear-gradient(180deg, #004d00 0%, #002600 100%);
+    color: #fff;
     margin: 0;
     padding: 0;
-    text-align: center;
 }
 
 header {
-    background-color: #004d00;
-    color: #ffffff;
+    text-align: center;
     padding: 20px;
-    margin-bottom: 20px;
-}
-
-header h1, header h2 {
-    margin: 0;
-    padding: 10px 0;
-}
-
-header p {
-    margin: 10px 0;
-    padding: 0 20px;
+    background-color: #004d00; /* Fond vert distinctif pour le header */
 }
 
 button {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #004d00;
+    color: #fff;
     border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px 2px;
+    padding: 10px 20px;
+    margin: 10px;
     cursor: pointer;
-}
-
-button.showForm {
-    background-color: #333333;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #555555;
+    background-color: #006600;
 }
 
-#contactForm {
+#form-container {
     background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
     padding: 20px;
     border-radius: 10px;
-    max-width: 400px;
     margin: 20px auto;
+    width: 80%;
+    max-width: 500px;
 }
 
-#contactForm label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-#contactForm input, #contactForm textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0 20px;
-}
-
-.hidden {
-    display: none;
+#services {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(180deg, #004d00 0%, #002600 100%);
 }
 
 .service {
-    display: inline-block;
-    width: 45%;
-    margin: 2.5%;
-    background-color: #e0e0e0;
-    padding: 10px;
+    margin: 20px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .service img {
-    width: 100%;
+    max-width: 100%;
     border-radius: 10px;
-    filter: hue-rotate(20deg); /* Teinte légèrement verdâtre */
+    transition: transform 0.3s ease;
+    filter: hue-rotate(90deg) saturate(1.2);
 }
 
-.service:hover {
+.service img:hover {
     transform: scale(1.05);
 }
 
 #testimonials {
-    background-color: #ffffff;
-    color: #004d00;
+    background-color: #003300;
     padding: 20px;
-    border-radius: 10px;
-    margin: 20px auto;
-    max-width: 600px;
-    font-style: italic;
+    text-align: center;
+}
+
+#testimonials p {
+    font-style: normal; /* Écriture plus classique */
+    font-size: 1.1em;
 }
 
 footer {
-    background-color: #003300; /* Fond vert distinctif */
-    color: #ffffff;
+    background-color: #002600;
+    color: #fff;
+    text-align: center;
     padding: 20px;
-    position: relative;
 }
 
 footer a {
-    color: #ffffff;
+    color: #fff;
     text-decoration: none;
     margin: 0 10px;
 }
 
-footer a img {
+footer img {
+    width: 50px;
+    height: 50px;
     vertical-align: middle;
-    margin-right: 5px;
-    width: 24px; /* Ajustement de la taille de la miniature LinkedIn */
-    height: 24px;
 }
 
-footer a:hover {
-    text-decoration: underline;
+#music-button {
+    background-color: #004d00;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#music-button:hover {
+    background-color: #006600;
 }
   
   
