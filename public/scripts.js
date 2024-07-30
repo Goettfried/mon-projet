@@ -28,30 +28,33 @@ function sendEmail() {
     var phone = document.getElementById('phone').value;
     var message = document.getElementById('message').value;
 
-    if (!name || !email || !message) {
-        alert('Veuillez remplir tous les champs obligatoires.');
-        return;
-    }
-
-    fetch('/.netlify/functions/sendTestEmail', {
-        method: 'POST',
-        body: JSON.stringify({
-            name: name,
-            email: email,
-            phone: phone,
-            message: message
+    if (name && email && message) {
+        // Remplacez l'URL ci-dessous par l'URL réelle de votre fonction Netlify
+        fetch('/.netlify/functions/sendTestEmail', {
+            method: 'POST',
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                phone: phone,
+                message: message
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Email envoyé avec succès !');
-            hideForm();
-        } else {
-            alert('Erreur lors de l\'envoi de l\'email: ' + data.error);
-        }
-    })
-    .catch(error => {
-        alert('Erreur lors de l\'envoi de l\'email: ' + error.message);
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Email envoyé avec succès !');
+                hideForm();
+            } else {
+                alert('Erreur lors de l\'envoi de l\'email: ' + data.error);
+            }
+        })
+        .catch(error => {
+            alert('Erreur lors de l\'envoi de l\'email: ' + error.message);
+        });
+    } else {
+        alert('Veuillez remplir tous les champs obligatoires.');
+    }
 }
