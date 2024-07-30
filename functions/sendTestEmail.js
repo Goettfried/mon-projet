@@ -1,39 +1,48 @@
 const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
 
-const transporter = nodemailer.createTransport({
-  service: process.env.EMAIL_SERVICE,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
+const EMAIL_USER = process.env.EMAIL_USER;
+const EMAIL_SERVICE = process.env.EMAIL_SERVICE;
+
+const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
+oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+
+async function sendEmail(name, email, phone, message, type) {
+  try {
+    const accessToken = await oAuth2Client.getAccessToken();
+    const transport = nodemailer.createTransport({
+      service: EMAIL_SERVICE,
+      auth: {
+        type: 'OAuth2',
+        user: EMAIL_USER,
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        refreshToken: REFRESH_TOKEN,
+        accessToken: accessToken,
+      },
+    });
+
+    const mailOptions = {
+      from: EMAIL_USER,
+      to: EMAIL_USER,
+      subject: type === 'job' ? 'Nouvelle demande de recherche d\'emploi' : 'Nouvelle demande de recherche de personnel',
+      html: `
+        <h3>Nom: ${name}</h3>
+        <p>Email: ${email}</p>
+        <p>Téléphone: ${phone}</p>
+        <p>Message: ${message}</p>
+      `,
+    };
+
+    await transport.sendMail(mailOptions);
+    return 'Email envoyé avec succès';
+  } catch (error) {
+    throw new Error(error.message);
   }
-});
-
-const sendEmail = (name, email, phone, message, type) => {
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: `Message de ${name}`,
-    text: `
-      Nom: ${name}
-      Email: ${email}
-      Numéro de téléphone: ${phone}
-      Message: ${message}
-      Type: ${type}
-    `
-  };
-
-  if (type === 'Je recherche du travail') {
-    mailOptions.text += `
-      Bonjour ! Je vous souhaite la bienvenue, merci pour votre démarche. Je vais prendre contact avec vous très prochainement. Pour aller de l'avant, j'aimerais vous demander de me soumettre votre dossier complet, comportant CV, attestation/certificats de travail et diplôme. Je serais enchanté de vous aider. Meilleures salutations.
-    `;
-  } else if (type === 'Je recherche du personnel') {
-    mailOptions.text += `
-      Bonjour ! Je vous souhaite la bienvenue, merci pour votre démarche. Si vous êtes intéressé(e) par mes prestations de placement fixe, je vous invite à consulter ce lien, qui vous mènera à mes conditions générales. Si vous êtes plutôt intéressé(e) par de la location de services, ignorez ça pour le moment : je vous invite à me soumettre le nombre de travailleurs dont vous aurez besoin ainsi que la durée de leur mission, puis je prendrai rapidement contact avec vous. Je me réjouis de faire affaire avec vous. Meilleures salutations.
-      Lien vers les conditions générales: https://welshrecrutement.netlify.app/conditions_generales_nicolas_ballu.pdf
-    `;
-  }
-
-  return transporter.sendMail(mailOptions);
-};
+}
 
 module.exports = sendEmail;

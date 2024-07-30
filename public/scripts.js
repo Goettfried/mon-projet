@@ -1,72 +1,20 @@
-function showForm(type) {
-    document.getElementById('type').value = type;
-    document.getElementById('form-container').style.display = 'block';
-    document.getElementById('form-container').scrollIntoView({ behavior: 'smooth' });
-  }
-  
-  function hideForm() {
-    document.getElementById('contact-form').reset();
-    document.getElementById('form-container').style.display = 'none';
-  }
-  
-  function validateEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()\[\]\\.,;:\s@"]+\.)+[^<>()\[\]\\.,;:\s@"]{2,})$/i;
-    return re.test(String(email).toLowerCase());
-  }
-  
-  function sanitizeInput(input) {
-    const element = document.createElement('div');
-    element.innerText = input;
-    return element.innerHTML;
-  }
-  
-  function sendEmail(event) {
+document.getElementById('contactForm').addEventListener('submit', async function (event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
   
-    const name = sanitizeInput(formData.get('name'));
-    const email = sanitizeInput(formData.get('email'));
-    const phone = sanitizeInput(formData.get('phone'));
-    const message = sanitizeInput(formData.get('message'));
-    const type = sanitizeInput(formData.get('type'));
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const message = document.getElementById('message').value;
+    const type = document.querySelector('input[name="type"]:checked').value;
   
-    if (!validateEmail(email)) {
-      alert('Veuillez fournir une adresse email valide.');
-      return;
-    }
-  
-    fetch('/api/send-email', {
+    const response = await fetch('/api/send-email', {
       method: 'POST',
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-        message: message,
-        type: type
-      }),
       headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        alert('Email envoyé avec succès.');
-        hideForm();
-      } else {
-        alert('Erreur lors de l\'envoi de l\'email.');
-      }
-    })
-    .catch(error => {
-      console.error('Erreur:', error);
-      alert('Erreur lors de l\'envoi de l\'email.');
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, phone, message, type }),
     });
-  }
   
-  function toggleMusic() {
-    const music = document.getElementById('music');
-    if (music.paused) {
-      music.play();
-    } else {
-      music.pause();
-    }
-  }  
+    const result = await response.text();
+    alert(result);
+  });  
