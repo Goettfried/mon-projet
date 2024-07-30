@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
     try {
         const { name, email, message, responseMessage } = JSON.parse(event.body);
 
@@ -12,23 +12,24 @@ exports.handler = async function(event, context) {
             }
         });
 
-        const mailOptions = {
+        // Email to site admin
+        const mailOptionsAdmin = {
             from: process.env.EMAIL_USER,
             to: 'rhsmart.ballu@gmail.com',
-            subject: `Nouveau message de ${name}`,
-            text: `Nom: ${name}\nEmail: ${email}\nMessage: ${message}`,
+            subject: 'Nouveau message de contact',
+            text: `Nom: ${name}\nEmail: ${email}\nMessage: ${message}`
         };
 
-        await transporter.sendMail(mailOptions);
-
-        const responseMailOptions = {
+        // Response email to user
+        const mailOptionsUser = {
             from: process.env.EMAIL_USER,
             to: email,
-            subject: "Vous avez fait le bon choix !",
-            html: responseMessage,
+            subject: 'Vous avez fait le bon choix !',
+            text: responseMessage
         };
 
-        await transporter.sendMail(responseMailOptions);
+        await transporter.sendMail(mailOptionsAdmin);
+        await transporter.sendMail(mailOptionsUser);
 
         return {
             statusCode: 200,
