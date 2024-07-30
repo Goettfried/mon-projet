@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nicolas Ballu, Spécialiste du Recrutement Indépendant, propose des services de placement de personnel fixe et temporaire en Suisse Romande.">
-    <meta name="keywords" content="recrutement, placement de personnel, location de services, médiation sociale, Suisse Romande">
     <title>Nicolas Ballu - Recrutement</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,8 +15,8 @@
         <p>Je propose des prestations de <strong>placement de personnel fixe et temporaire</strong>, quelque soit votre secteur. Vous aurez l’occasion de me communiquer votre besoin en cliquant sur l’un de ces deux onglets.</p>
         <p>Au plaisir de vous accompagner dans votre quête !</p>
         <div class="buttons">
-            <button onclick="showForm('Je recherche du travail')" aria-label="Rechercher du travail">Je recherche du travail</button>
-            <button onclick="showForm('Je recherche du personnel')" aria-label="Rechercher du personnel">Je recherche du personnel</button>
+            <button onclick="showForm('Je recherche du travail')">Je recherche du travail</button>
+            <button onclick="showForm('Je recherche du personnel')">Je recherche du personnel</button>
         </div>
     </header>
 
@@ -33,8 +31,8 @@
             <label for="message">Message:</label>
             <textarea id="message" name="message" required></textarea>
             <input type="hidden" id="type" name="type">
-            <button type="submit" aria-label="Envoyer le formulaire">Envoyer</button>
-            <button type="button" onclick="hideForm()" aria-label="Annuler">Annuler</button>
+            <button type="submit">Envoyer</button>
+            <button type="button" onclick="hideForm()">Annuler</button>
         </form>
     </section>
 

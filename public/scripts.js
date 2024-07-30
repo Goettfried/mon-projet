@@ -1,33 +1,35 @@
 function showForm(type) {
-    document.getElementById('form-container').style.display = 'block';
     document.getElementById('type').value = type;
+    document.getElementById('form-container').style.display = 'block';
 }
 
 function hideForm() {
-    document.getElementById('form-container').style.display = 'none';
     document.getElementById('contact-form').reset();
+    document.getElementById('form-container').style.display = 'none';
 }
 
-function sendEmail(event) {
+async function sendEmail(event) {
     event.preventDefault();
-    const form = document.getElementById('contact-form');
+    const form = event.target;
     const formData = new FormData(form);
+    const jsonData = {};
+    formData.forEach((value, key) => jsonData[key] = value);
 
-    fetch('/.netlify/functions/sendTestEmail', {
-        method: 'POST',
-        body: JSON.stringify(Object.fromEntries(formData)),
-        headers: {
-            'Content-Type': 'application/json'
+    try {
+        const response = await fetch('/.netlify/functions/sendTestEmail', {
+            method: 'POST',
+            body: JSON.stringify(jsonData)
+        });
+        const result = await response.json();
+        if (response.ok) {
+            alert('Email sent successfully');
+            hideForm();
+        } else {
+            throw new Error(result.message);
         }
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        hideForm();
-    })
-    .catch(error => {
-        alert('Erreur lors de l\'envoi de l\'email: ' + error.message);
-    });
+    } catch (error) {
+        alert(`Erreur lors de l'envoi de l'email: ${error.message}`);
+    }
 }
 
 function toggleMusic() {
