@@ -1,65 +1,67 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', async function (event) {
-      event.preventDefault();
-  
-      const form = event.target;
-      const option = form.getAttribute('data-option');
-      const formData = new FormData(form);
-      const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        message: formData.get('message'),
-        option: option
-      };
-  
-      try {
-        const response = await fetch('/.netlify/functions/sendTestEmail', {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-  
-        if (response.ok) {
-          alert('Email envoyé avec succès!');
-          form.reset();
-          hideForm();
-        } else {
-          alert('Erreur lors de l\'envoi de l\'email: ' + response.statusText);
-        }
-      } catch (error) {
-        alert('Erreur lors de l\'envoi de l\'email: ' + error.message);
-      }
-    });
-  
-    document.addEventListener('click', function (event) {
-      const formContainer = document.getElementById('form-container');
-      if (!formContainer.contains(event.target) && formContainer.style.display === 'block') {
-        hideForm();
-      }
-    });
-  });
-  
-  function showForm(option) {
-    const formContainer = document.getElementById('form-container');
-    const form = document.getElementById('contact-form');
-    form.setAttribute('data-option', option);
-    formContainer.style.display = 'block';
-  }
-  
-  function hideForm() {
-    const formContainer = document.getElementById('form-container');
-    formContainer.style.display = 'none';
-  }
-  
-  function playPauseMusic() {
-    const music = document.getElementById('background-music');
-    if (music.paused) {
-      music.play();
-    } else {
-      music.pause();
+function showForm(type) {
+    document.getElementById('form-container').style.display = 'flex';
+    document.getElementById('form-type').value = type;
+}
+
+function hideForm() {
+    document.getElementById('form-container').style.display = 'none';
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('message').value = '';
+}
+
+function sendEmail() {
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
+    var message = document.getElementById('message').value;
+    var type = document.getElementById('form-type').value;
+
+    if (!name || !email || !message) {
+        alert('Veuillez remplir tous les champs obligatoires.');
+        return;
     }
-  }  
+
+    fetch('/.netlify/functions/sendTestEmail', {
+        method: 'POST',
+        body: JSON.stringify({
+            name: name,
+            email: email,
+            phone: phone,
+            message: message,
+            type: type
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            alert('E-mail envoyé avec succès !');
+            hideForm();
+        } else {
+            alert('Erreur lors de l\'envoi de l\'e-mail.');
+        }
+    }).catch(error => {
+        console.error('Erreur:', error);
+        alert('Erreur lors de l\'envoi de l\'e-mail.');
+    });
+}
+
+function toggleMusic() {
+    var audio = document.getElementById('background-music');
+    if (audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
+}
+
+document.addEventListener('click', function (event) {
+    var isClickInsideForm = document.getElementById('form-container').contains(event.target);
+    var isClickInsideButton = event.target.classList.contains('buttons');
+
+    if (!isClickInsideForm && !isClickInsideButton) {
+        hideForm();
+    }
+});

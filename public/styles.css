@@ -1,7 +1,8 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #e6e6e6;
 }
 
 header {
@@ -11,42 +12,57 @@ header {
     padding: 20px;
 }
 
-header h1, header h2 {
-    margin: 10px 0;
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+header h2 {
+    font-size: 1.5em;
+    margin: 0;
 }
 
 header p {
-    margin: 5px 0;
+    font-size: 1.2em;
+    margin: 10px 0;
 }
 
-.form-button {
-    margin: 10px;
-    padding: 10px 20px;
+.buttons {
     background-color: #008000;
     color: white;
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 10px;
 }
 
-.form-button:hover {
+.buttons:hover {
     background-color: #006400;
 }
 
 #form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 1000;
 }
 
 .form-content {
     display: flex;
     flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 form label {
@@ -105,6 +121,8 @@ form button[type="button"]:hover {
     height: auto;
     max-width: 600px;
     transition: transform 0.3s;
+    filter: hue-rotate(90deg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .service-image:hover {
@@ -115,36 +133,45 @@ form button[type="button"]:hover {
     margin: 20px;
     padding: 20px;
     background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-style: italic;
+    font-weight: 400;
+}
+
+.testimonials h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
 }
 
 footer {
+    background-color: #006400;
+    color: white;
     text-align: center;
-    background-color: #006400;
+    padding: 10px;
+    position: relative;
+}
+
+footer a {
     color: white;
-    padding: 20px;
-    margin-top: 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.linkedin-icon {
-    width: 30px;
-    height: 30px;
-    vertical-align: middle;
+.linkedin-icon, .music-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    filter: hue-rotate(180deg);
+    transition: filter 0.3s;
 }
 
-button {
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #008000;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #006400;
+footer a:hover .linkedin-icon, footer a:hover .music-icon {
+    filter: hue-rotate(0deg);
 }
   
   
