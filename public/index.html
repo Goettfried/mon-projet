@@ -1,70 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicolas BALLU - Consultant en Recrutement</title>
+    <title>Page de Nicolas Ballu</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
         <h1>Nicolas BALLU</h1>
-        <h2>Spécialiste du Recrutement Indépendant (S.R.I.)</h2>
+        <h2>Spécialiste du Recrutement Indépendant (S.R.I)</h2>
         <p>"Je connais bien Vaud, j'habite en Chablais. J'ai eu le privilège et la chance de me distinguer dans la conduite et l'influence de l'industrie, notamment dans le recrutement de cadres techniques. Marqué par une approche entrepreneuriale, je gère de manière autonome la création de nouveaux bureaux et le recrutement de personnel fixe et temporaire dans les entreprises suisses et romandes. J'aide également les entreprises à réussir leur transition énergétique."</p>
-        <div class="buttons">
-            <button onclick="showForm('work')">Je recherche du travail</button>
-            <button onclick="showForm('personnel')">Je recherche du personnel</button>
-        </div>
+        <button id="job-seeker-btn">Je recherche du travail</button>
+        <button id="employer-btn">Je recherche du personnel</button>
     </header>
-
-    <section id="services">
-        <h3>Mes Services</h3>
-        <div class="service">
-            <img src="images/20240217_082717.jpg" alt="Service 1">
-            <h4>Placement de personnel fixe</h4>
-            <p>Nous trouvons le bon candidat pour vos besoins spécifiques.</p>
-        </div>
-        <div class="service">
-            <img src="images/20240221_152031.jpg" alt="Service 2">
-            <h4>Location de services</h4>
-            <p>Solutions flexibles pour vos besoins temporaires.</p>
-        </div>
-    </section>
-
-    <section id="testimonials">
-        <h3>Témoignages</h3>
-        <blockquote>"C'était vraiment super de travailler avec Nicolas, il comprend vite et agit avec efficacité." - J.D.</blockquote>
-        <blockquote>"Je recommande Nicolas à toute entreprise qui cherche à améliorer ses processus de recrutement." - M.C.</blockquote>
-        <blockquote>"Sa vision et son expertise nous ont été d'une grande aide." - G.C.</blockquote>
-        <blockquote>"Je suis ravi de notre collaboration, je ferai de nouveau appel à ses services à l'avenir." - A.A.</blockquote>
-    </section>
-
+    <main>
+        <section id="services">
+            <h2>Mes Services</h2>
+            <div class="service">
+                <img src="images/20240217_082717.jpg" alt="Service 1">
+                <h3>Placement de personnel fixe</h3>
+                <p>Nous trouvons le bon candidat pour vos besoins spécifiques.</p>
+            </div>
+            <div class="service">
+                <img src="images/20240221_152031.jpg" alt="Service 2">
+                <h3>Location de services</h3>
+                <p>Solutions flexibles pour vos besoins temporaires.</p>
+            </div>
+        </section>
+        <section id="testimonials">
+            <h2>Témoignages</h2>
+            <p>"C'était vraiment super de travailler avec Nicolas, il comprend vite et agit avec efficacité." - J.D.</p>
+            <p>"Je recommande Nicolas à toute entreprise qui cherche à améliorer ses processus de recrutement." - M.C.</p>
+            <p>"Sa ténacité et son expertise dans le domaine génialité, m'ont véritablement permis de mieux exploiter mes qualifications et ainsi m'ouvrir une porte vers un avenir prometteur." - N.A.</p>
+        </section>
+    </main>
     <footer>
         <p>© 2024 Nicolas Ballu</p>
-        <a href="https://www.linkedin.com/in/nicolas-ballu" target="_blank">
-            <img src="images/image (44).jpg" alt="LinkedIn" class="linkedin-icon">
-            <p>LinkedIn</p>
-        </a>
+        <a href="https://www.linkedin.com/in/nicolas-ballu" target="_blank">LinkedIn</a>
+        <button id="music-btn">Écouter de la musique</button>
     </footer>
-
-    <div id="form-container" class="form-container">
-        <form id="contact-form">
-            <h2>Contactez-moi</h2>
-            <label for="name">Nom:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-
-            <input type="hidden" id="form-type" name="form-type">
-
-            <button type="submit">Envoyer</button>
-            <button type="button" onclick="closeForm()">Fermer</button>
-        </form>
-    </div>
+    <script src="scripts.js"></script>
 </body>
 </html>
