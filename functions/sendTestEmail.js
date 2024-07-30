@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 exports.handler = async function (event, context) {
-  const { name, email, message, option } = JSON.parse(event.body);
+  const { name, email, phone, message, option } = JSON.parse(event.body);
 
   let subject, text;
 
@@ -22,15 +22,23 @@ exports.handler = async function (event, context) {
     },
   });
 
-  let mailOptions = {
+  let userMailOptions = {
     from: process.env.EMAIL_USER,
     to: email,
     subject: subject,
     text: text,
   };
 
+  let adminMailOptions = {
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
+    subject: `Nouveau formulaire rempli par ${name}`,
+    text: `Nom: ${name}\nEmail: ${email}\nTéléphone: ${phone || 'Non renseigné'}\nMessage: ${message}`,
+  };
+
   try {
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(userMailOptions);
+    await transporter.sendMail(adminMailOptions);
     return {
       statusCode: 200,
       body: JSON.stringify({ message: 'Email sent successfully' }),
