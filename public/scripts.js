@@ -56,12 +56,14 @@ function sendEmail(event) {
     }
 
     // Send the email
-    fetch('/sendTestEmail', {
+    fetch('/api/send-email', {
         method: 'POST',
         body: JSON.stringify({
-            to: email,
-            subject: 'Réponse automatique de Nicolas Ballu',
-            text: emailContent
+            name: name,
+            email: email,
+            phone: phone,
+            message: message,
+            type: type
         }),
         headers: {
             'Content-Type': 'application/json'
