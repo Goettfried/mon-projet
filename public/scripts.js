@@ -1,10 +1,21 @@
+document.addEventListener('click', function(event) {
+    var isClickInsideForm = document.getElementById('formContainer').contains(event.target);
+    var isClickInsideButton = event.target.classList.contains('showForm');
+    if (!isClickInsideForm && !isClickInsideButton) {
+        hideForm();
+    }
+});
+
 function showForm(type) {
-    document.getElementById('form-container').style.display = 'flex';
-    document.getElementById('form-type').value = type;
+    var form = document.getElementById('contactForm');
+    form.classList.remove('hidden');
+    form.classList.add('visible');
 }
 
 function hideForm() {
-    document.getElementById('form-container').style.display = 'none';
+    var form = document.getElementById('contactForm');
+    form.classList.add('hidden');
+    form.classList.remove('visible');
     document.getElementById('name').value = '';
     document.getElementById('email').value = '';
     document.getElementById('phone').value = '';
@@ -16,52 +27,34 @@ function sendEmail() {
     var email = document.getElementById('email').value;
     var phone = document.getElementById('phone').value;
     var message = document.getElementById('message').value;
-    var type = document.getElementById('form-type').value;
 
-    if (!name || !email || !message) {
-        alert('Veuillez remplir tous les champs obligatoires.');
-        return;
-    }
-
-    fetch('/.netlify/functions/sendTestEmail', {
-        method: 'POST',
-        body: JSON.stringify({
-            name: name,
-            email: email,
-            phone: phone,
-            message: message,
-            type: type
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(response => {
-        if (response.ok) {
-            alert('E-mail envoyé avec succès !');
-            hideForm();
-        } else {
-            alert('Erreur lors de l\'envoi de l\'e-mail.');
-        }
-    }).catch(error => {
-        console.error('Erreur:', error);
-        alert('Erreur lors de l\'envoi de l\'e-mail.');
-    });
-}
-
-function toggleMusic() {
-    var audio = document.getElementById('background-music');
-    if (audio.paused) {
-        audio.play();
+    if (name && email && message) {
+        // Remplacez l'URL ci-dessous par l'URL réelle de votre fonction Netlify
+        fetch('/.netlify/functions/sendTestEmail', {
+            method: 'POST',
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                phone: phone,
+                message: message
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Email envoyé avec succès !');
+                hideForm();
+            } else {
+                alert('Erreur lors de l\'envoi de l\'email: ' + data.error);
+            }
+        })
+        .catch(error => {
+            alert('Erreur lors de l\'envoi de l\'email: ' + error.message);
+        });
     } else {
-        audio.pause();
+        alert('Veuillez remplir tous les champs obligatoires.');
     }
 }
-
-document.addEventListener('click', function (event) {
-    var isClickInsideForm = document.getElementById('form-container').contains(event.target);
-    var isClickInsideButton = event.target.classList.contains('buttons');
-
-    if (!isClickInsideForm && !isClickInsideButton) {
-        hideForm();
-    }
-});
