@@ -82,6 +82,7 @@ button:hover {
 .service img {
     width: 100%;
     border-radius: 10px;
+    filter: hue-rotate(20deg); /* Teinte légèrement verdâtre */
 }
 
 .service:hover {
@@ -95,10 +96,11 @@ button:hover {
     border-radius: 10px;
     margin: 20px auto;
     max-width: 600px;
+    font-style: italic;
 }
 
 footer {
-    background-color: #004d00;
+    background-color: #003300; /* Fond vert distinctif */
     color: #ffffff;
     padding: 20px;
     position: relative;
@@ -113,6 +115,8 @@ footer a {
 footer a img {
     vertical-align: middle;
     margin-right: 5px;
+    width: 24px; /* Ajustement de la taille de la miniature LinkedIn */
+    height: 24px;
 }
 
 footer a:hover {

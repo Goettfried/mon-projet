@@ -29,7 +29,6 @@ function sendEmail() {
     var message = document.getElementById('message').value;
 
     if (name && email && message) {
-        // Remplacez l'URL ci-dessous par l'URL réelle de votre fonction Netlify
         fetch('/.netlify/functions/sendTestEmail', {
             method: 'POST',
             body: JSON.stringify({
