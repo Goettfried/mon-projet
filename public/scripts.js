@@ -1,31 +1,36 @@
 function showForm(type) {
-    document.getElementById('type').value = type;
     document.getElementById('form-container').style.display = 'block';
+    document.getElementById('type').value = type;
 }
 
 function hideForm() {
-    document.getElementById('contact-form').reset();
     document.getElementById('form-container').style.display = 'none';
+    document.getElementById('contact-form').reset();
 }
 
 async function sendEmail(event) {
     event.preventDefault();
-    const form = event.target;
+    const form = document.getElementById('contact-form');
     const formData = new FormData(form);
-    const jsonData = {};
-    formData.forEach((value, key) => jsonData[key] = value);
+
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
 
     try {
         const response = await fetch('/.netlify/functions/sendTestEmail', {
             method: 'POST',
-            body: JSON.stringify(jsonData)
+            body: JSON.stringify(data)
         });
+
         const result = await response.json();
+
         if (response.ok) {
-            alert('Email sent successfully');
+            alert(result.message);
             hideForm();
         } else {
-            throw new Error(result.message);
+            alert(`Erreur lors de l'envoi de l'email: ${result.message}`);
         }
     } catch (error) {
         alert(`Erreur lors de l'envoi de l'email: ${error.message}`);
