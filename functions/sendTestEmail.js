@@ -1,9 +1,26 @@
 const nodemailer = require('nodemailer');
 
-exports.handler = async function (event, context) {
-    const { name, email, message, type } = JSON.parse(event.body);
+exports.handler = async function(event, context) {
+    let formData;
+    try {
+        formData = JSON.parse(event.body);
+    } catch (error) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ success: false, error: 'Invalid form data' })
+        };
+    }
 
-    let transporter = nodemailer.createTransport({
+    const { name, email, message, formType } = formData;
+
+    if (!name || !email || !message || !formType) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ success: false, error: 'Missing form data' })
+        };
+    }
+
+    const transporter = nodemailer.createTransport({
         service: process.env.EMAIL_SERVICE,
         auth: {
             user: process.env.EMAIL_USER,
@@ -11,16 +28,22 @@ exports.handler = async function (event, context) {
         }
     });
 
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: 'Vous avez fait le bon choix !',
-    };
+    let mailOptions;
 
-    if (type === 'travail') {
-        mailOptions.html = `<p>Bonjour ${name} !</p><p>Je vous souhaite la bienvenue, merci pour votre démarche. Je vais prendre contact avec vous très prochainement.</p><p>Pour aller de l'avant, je souhaiterais d'abord vous demander de me soumettre votre dossier complet, comportant CV, attestation/certificats de travail et diplôme.</p><p>Je serais enchanté de vous aider.</p><p>Meilleures salutations.</p>`;
-    } else if (type === 'personnel') {
-        mailOptions.html = `<p>Bonjour ${name} !</p><p>Je vous souhaite la bienvenue, merci pour votre démarche.</p><p>Si vous êtes intéressé(e) par mes prestations de placement fixe, je vous invite à consulter ce lien, qui vous mènera à mes conditions générales : <a href="https://welshrecrutement.netlify.app/conditions_generales_nicolas_ballu.pdf">Conditions Générales</a>.</p><p>Si vous êtes plutôt intéressé(e) par de location de services, ignorez-le pour le moment : je vous invite à me soumettre le nombre de travailleurs dont vous aurez besoin ainsi que la durée de leur mission, puis je prendrai rapidement contact avec vous.</p><p>Je me réjouis de faire affaire avec vous.</p><p>Meilleures salutations.</p>`;
+    if (formType === 'work') {
+        mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Vous avez fait le bon choix !',
+            text: `Bonjour ${name}!\n\nJe vous souhaite la bienvenue, merci pour votre démarche. Je vais prendre contact avec vous très prochainement. Pour aller de l'avant, je souhaiterais d'abord vous demander de me soumettre votre dossier complet, comportant CV, attestation/certificats de travail et diplôme. Je serais enchanté de vous aider.\n\nMeilleures salutations.`
+        };
+    } else if (formType === 'hire') {
+        mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Vous avez fait le bon choix !',
+            text: `Bonjour ${name}!\n\nJe vous souhaite la bienvenue, merci pour votre démarche. Si vous êtes intéressé(e) par mes prestations de placement fixe, je vous invite à consulter ce lien, qui vous mènera à mes conditions générales : ${process.env.SITE_URL}/conditions_generales_nicolas_ballu.pdf\n\nSi vous êtes plutôt intéressé(e) par de location de services, ignorez-le pour le moment : je vous invite à me soumettre le nombre de travailleurs dont vous aurez besoin ainsi que la durée de leur mission, puis je prendrai rapidement contact avec vous. Je me réjouis de faire affaire avec vous.\n\nMeilleures salutations.`
+        };
     }
 
     try {
