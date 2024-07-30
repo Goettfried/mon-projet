@@ -1,43 +1,61 @@
 const nodemailer = require('nodemailer');
+const path = require('path');
+const fs = require('fs');
 
-exports.handler = async (event, context) => {
-    const { formType, name, email, message } = JSON.parse(event.body);
-
-    const transport = nodemailer.createTransport({
-        service: process.env.EMAIL_SERVICE,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        },
-    });
-
-    let mailOptions;
-    if (formType === 'travail') {
-        mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: 'Vous avez fait le bon choix !',
-            text: `Bonjour ${name} !\n\nJe vous souhaite la bienvenue, merci pour votre démarche. Je vais prendre contact avec vous très prochainement. Pour aller de l'avant, je souhaiterais d'abord vous demander de me soumettre votre dossier complet, comportant CV, attestation/certificats de travail et diplôme. Je serais enchanté de vous aider. Meilleures salutations.`
-        };
-    } else if (formType === 'personnel') {
-        mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: 'Vous avez fait le bon choix !',
-            text: `Bonjour ${name} !\n\nJe vous souhaite la bienvenue, merci pour votre démarche. Si vous êtes intéressé(e) par mes prestations de placement fixe, je vous invite à consulter ce lien, qui vous mènera à mes conditions générales : ${process.env.SITE_URL}/public/conditions_generales_nicolas_ballu.pdf. Si vous êtes plutôt intéressé(e) par de location de services, ignorez-le pour le moment : je vous invite à me soumettre le nombre de travailleurs dont vous aurez besoin ainsi que la durée de leur mission, puis je prendrai rapidement contact avec vous. Je me réjouis de faire affaire avec vous. Meilleures salutations.`
-        };
-    }
-
+exports.handler = async function(event, context) {
     try {
-        await transport.sendMail(mailOptions);
+        const data = JSON.parse(event.body);
+        const { name, email, message } = data;
+
+        const filePath = path.resolve(__dirname, '..', 'public', 'conditions_generales_nicolas_ballu.pdf');
+        console.log('Resolved file path:', filePath);
+
+        // Vérifiez si le fichier existe réellement
+        if (!fs.existsSync(filePath)) {
+            console.error(`Le fichier n'existe pas: ${filePath}`);
+            return {
+                statusCode: 404,
+                body: JSON.stringify({ error: 'File not found: ' + filePath })
+            };
+        }
+
+        let transporter = nodemailer.createTransport({
+            service: process.env.EMAIL_SERVICE,
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Vous avez fait le bon choix !',
+            text: 'Bonjour !\n\nMerci pour votre démarche. Voici les détails que vous avez soumis :\n\n' +
+                  `Nom: ${name}\n` +
+                  `Email: ${email}\n` +
+                  `Message: ${message}\n\n` +
+                  'Si vous êtes intéressé(e) par mes prestations de placement fixe, veuillez consulter ce lien pour mes conditions générales : ' +
+                  `${process.env.SITE_URL}/public/conditions_generales_nicolas_ballu.pdf\n\n` +
+                  'Meilleures salutations.',
+            attachments: [{
+                filename: 'conditions_generales_nicolas_ballu.pdf',
+                path: filePath,
+                contentType: 'application/pdf'
+            }]
+        };
+
+        let info = await transporter.sendMail(mailOptions);
+        console.log('Email sent: ' + info.response);
         return {
             statusCode: 200,
-            body: JSON.stringify({ success: true }),
+            body: JSON.stringify({ message: 'Email sent successfully' })
         };
     } catch (error) {
+        console.error('Error sending email:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ success: false, error: error.message }),
+            body: JSON.stringify({ error: 'Error sending email: ' + error.message })
         };
     }
 };
