@@ -30,7 +30,8 @@ exports.handler = async function(event, context) {
 
             Je vous souhaite la bienvenue, merci pour votre démarche. 
             Je vais prendre contact avec vous très prochainement. 
-            Pour aller de l'avant, j'aimerais vous demander de me soumettre votre dossier complet, comportant CV, attestation/certificats de travail et diplôme. 
+            Pour aller de l'avant, j'aimerais vous demander de me soumettre votre dossier complet, comportant CV, attestation/certificats de travail et diplômes. 
+            
             Je serais enchanté de vous aider.
 
             Meilleures salutations.
