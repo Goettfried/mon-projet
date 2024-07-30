@@ -28,9 +28,9 @@ exports.handler = async function(event, context) {
         text = `
             Bonjour ${name} ! 
 
-            Je vous souhaite la bienvenue, merci pour votre démarche. 
+            Je vous souhaite la bienvenue et merci pour votre démarche. 
             
-            Je vais prendre contact avec vous très prochainement. 
+            Nous allons échanger ensemble, très prochainement. 
             Pour aller de l'avant, j'aimerais tout d'abord commencer par vous demander de me soumettre votre dossier complet, comportant CV, attestation/certificats de travail et diplôme(s). 
             
             Je serais enchanté de vous aider.
