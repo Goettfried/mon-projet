@@ -1,104 +1,204 @@
+/* styles.css */
+
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #000000;
 }
 
 header {
     text-align: center;
-    margin-bottom: 20px;
+    background-color: #006400;
+    color: #ffffff;
+    padding: 20px 0;
+}
+
+header h1 {
+    font-size: 36px;
+    margin: 0;
+}
+
+header h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+header p {
+    margin: 10px 0;
+}
+
+main {
+    padding: 20px;
 }
 
 .buttons {
-    display: flex;
-    justify-content: center;
+    text-align: center;
     margin-bottom: 20px;
 }
 
-button {
-    margin: 0 10px;
+.buttons button {
+    background-color: #006400;
+    color: #ffffff;
+    border: none;
     padding: 10px 20px;
-    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttons button:hover {
+    background-color: #004d00;
 }
 
 #form-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+    display: none;
+    text-align: center;
 }
 
-form {
-    width: 100%;
-    max-width: 500px;
+#contact-form {
+    display: inline-block;
+    text-align: left;
+    border: 1px solid #006400;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
 }
 
-label {
+#contact-form label {
     display: block;
     margin-bottom: 5px;
 }
 
-input, textarea {
+#contact-form input,
+#contact-form textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
 }
 
-textarea {
-    resize: none;
+#contact-form button {
+    background-color: #006400;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#contact-form button:hover {
+    background-color: #004d00;
 }
 
 .services {
-    display: flex;
-    justify-content: space-around;
-}
-
-.service {
-    text-align: center;
-}
-
-.service-image {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
-.service-image:hover {
-    transform: scale(1.1);
-}
-
-.testimonials {
-    background: #f4f4f4;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.testimonial {
-    margin-bottom: 10px;
-}
-
-.audio-control {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-footer {
     text-align: center;
     margin-top: 20px;
 }
 
-.social-media {
+.service {
+    display: inline-block;
+    margin: 20px;
+}
+
+.service img {
+    max-width: 100%;
+    border: 2px solid #006400;
+    transition: filter 0.3s ease;
+}
+
+.service img:hover {
+    filter: hue-rotate(90deg);
+}
+
+.service h3 {
+    margin: 10px 0 5px;
+}
+
+.service p {
+    margin: 0;
+}
+
+.testimonials {
     text-align: center;
+    margin-top: 20px;
+}
+
+.testimonial {
+    display: inline-block;
+    margin: 20px;
+    max-width: 300px;
+    border: 1px solid #006400;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.audio-control {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.audio-control button {
+    background-color: #006400;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.audio-control button:hover {
+    background-color: #004d00;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #006400;
+    color: #ffffff;
+}
+
+footer .social-media {
     margin-top: 10px;
 }
 
-.social-media img {
-    width: 50px;
-    height: 50px;
-    transition: transform 0.3s ease;
+footer .social-media a {
+    display: inline-block;
+    margin: 0 10px;
+    color: #ffffff;
 }
 
-.social-media img:hover {
-    transform: scale(1.1);
+footer .social-media img {
+    width: 30px;
+    height: 30px;
+}
+
+footer .social-media span {
+    display: block;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.service img {
+    animation: fadeIn 2s;
+}
+
+button {
+    animation: fadeIn 1s;
+}
+
+#contact-form {
+    animation: fadeIn 1s;
 }
