@@ -5,21 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nicolas Ballu - Recrutement</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
         <h1>Nicolas BALLU</h1>
         <h2>Spécialiste du Recrutement Indépendant (S.R.I)</h2>
-        <p><em>"Je connais bien Vaud, j'habite en Chablais. J'ai eu le privilège et la joie de me distinguer dans le secteur du <strong>bâtiment et de l'industrie en Suisse Romande 🇨🇭</strong>, notamment dans le <strong>recrutement de cadres techniques</strong>. Marqué par une approche <strong>entrepreneuriale</strong>, je gère de manière autonome la création et le développement de <strong>portefeuilles clients</strong> tout en m'appliquant à maintenir l'<strong>engagement fort</strong> rendant le mieux compte des <strong>aspects sociaux du recrutement</strong>, autrement, je ne serais qu'un placeur comme les autres."</em></p>
-        <p>Mon but 💡 : <strong>Optimiser la communication entre les entreprises et les talents exceptionnels</strong>, par le prisme du <strong>placement de personnel privé</strong>, de la <strong>location de services</strong> et de la <strong>médiation sociale</strong> pour rétablir le dialogue, particulièrement appréciable en temps de crise. Mes clients référents sont typiquement des bureaux d'ingénieurs-conseils/bureaux d'études et des entreprises vaudoises, genevoises, fribourgeoises et valaisannes spécialisées dans la production, la distribution et la commercialisation d'électricité, ainsi que dans le développement de solutions énergétiques durables et innovantes. Ils ont choisi de se donner corps et âme à la transition énergétique et de s’acharner à nous obtenir l'efficience énergétique, oui, pour vous et moi : le contribuable ; en faveur de notre avenir à tous, du mien, et du vôtre.</p>
+        <p><strong>"Je connais bien Vaud, j'habite en Chablais.</strong> J’ai eu le privilège et la joie de me distinguer dans le secteur du <strong>bâtiment et de l'industrie en Suisse Romande 🇨🇭</strong>, notamment dans le <strong>recrutement de cadres techniques</strong>. Marqué par une approche <strong>entrepreneuriale</strong>, je gère de manière autonome la création et le développement de <strong>portefeuilles clients</strong> tout en m’appliquant à maintenir l'<strong>engagement fort</strong> rendant le mieux compte des <strong>aspects sociaux du recrutement</strong>, autrement, je ne serais qu'un placeur comme les autres."</p>
+        <p>Mon but 💡: <strong>Optimiser la communication entre les entreprises et les talents exceptionnels</strong>, par le prisme du <strong>placement de personnel privé</strong>, de la <strong>location de services</strong> et de la <strong>médiation sociale</strong> pour rétablir le dialogue, particulièrement appréciable en temps de crise. Mes clients référents sont typiquement des bureaux d'ingénieurs-conseils/bureaux d'études et des entreprises vaudoises, genevoises, fribourgeoises et valaisannes spécialisées dans la production, la distribution et la commercialisation d'électricité, ainsi que dans le développement de solutions énergétiques durables et innovantes. Ils ont choisi de se donner corps et âme à la transition énergétique et de s’acharner à nous obtenir l'efficience énergétique, oui, pour vous et moi : le contribuable ; en faveur de notre avenir à tous, du mien, et du vôtre.</p>
         <p>Je propose des prestations de <strong>placement de personnel fixe et temporaire</strong>, quelque soit votre secteur. Vous aurez l’occasion de me communiquer votre besoin en cliquant sur l’un de ces deux onglets.</p>
         <p>Au plaisir de vous accompagner dans votre quête !</p>
-        <button onclick="showForm('travail')">Je recherche du travail</button>
-        <button onclick="showForm('personnel')">Je recherche du personnel</button>
+        <div class="buttons">
+            <button onclick="showForm('Je recherche du travail')">Je recherche du travail</button>
+            <button onclick="showForm('Je recherche du personnel')">Je recherche du personnel</button>
+        </div>
     </header>
-    <section id="form-container" style="display: none;">
-        <form id="contact-form">
+
+    <section id="form-container" style="display:none;">
+        <form id="contact-form" onsubmit="sendEmail(event)">
             <label for="name">Nom:</label>
             <input type="text" id="name" name="name" required>
             <label for="email">Email:</label>
@@ -28,10 +30,12 @@
             <input type="tel" id="phone" name="phone">
             <label for="message">Message:</label>
             <textarea id="message" name="message" required></textarea>
+            <input type="hidden" id="type" name="type">
             <button type="submit">Envoyer</button>
             <button type="button" onclick="hideForm()">Annuler</button>
         </form>
     </section>
+
     <section id="services">
         <div class="service">
             <img src="images/20240221_152031.jpg" alt="Placement de personnel fixe">
@@ -44,19 +48,33 @@
             <p>Solutions flexibles pour vos besoins intérim.</p>
         </div>
     </section>
+
     <section id="testimonials">
         <h3>Témoignages</h3>
-        <p>"C'est la première fois que je me suis senti compris et apprécié à ma juste valeur dans une entreprise et c'est grâce à vous." - H.S.</p>
-        <p>"Je recommande Nicolas à toute entreprise qui cherche à améliorer ses processus de recrutement." - M.C.</p>
+        <blockquote>
+            <p>"C'est la première fois que je me suis senti compris et apprécié à ma juste valeur dans une entreprise et c'est grâce à vous." - H.S.</p>
+        </blockquote>
+        <blockquote>
+            <p>"Je vous remercie pour votre aide efficace." - J.D.</p>
+        </blockquote>
+        <blockquote>
+            <p>"Je recommande Nicolas à toute entreprise qui cherche à améliorer ses processus de recrutement." - M.C.</p>
+        </blockquote>
+        <blockquote>
+            <p>"Sa réactivité et son dynamisme m'ont vraiment impressionné." - R.B.</p>
+        </blockquote>
+        <blockquote>
+            <p>"Nicolas a su répondre à nos attentes précises, je suis vraiment satisfait de son aide." - G.C.</p>
+        </blockquote>
     </section>
+
     <footer>
         <p>&copy; 2024 Nicolas Ballu</p>
-        <a href="https://www.linkedin.com/in/baal-nicolas/" target="_blank">
-            <img src="images/image (44).png" alt="LinkedIn" style="width: 50px; height: 50px;">
-            LinkedIn
-        </a>
-        <button id="music-button" onclick="toggleMusic()">Écouter de la musique</button>
-        <audio id="background-music" src="music/bert_kaempfert.mp3"></audio>
+        <a href="https://www.linkedin.com/in/baal-nicolas/" target="_blank"><img src="images/image (44).png" alt="LinkedIn"> LinkedIn</a>
+        <button onclick="toggleMusic()">Écouter de la musique</button>
+        <audio id="music" src="music/bert_kaempfert.mp3" loop></audio>
     </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>

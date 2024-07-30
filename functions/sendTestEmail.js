@@ -1,10 +1,44 @@
 const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
 
-exports.handler = async (event, context) => {
-    const { name, email, phone, message } = JSON.parse(event.body);
+dotenv.config();
+
+exports.handler = async function(event, context) {
+    const { name, email, phone, message, type } = JSON.parse(event.body);
+
+    let subject = "";
+    let text = "";
+    let attachments = [];
+
+    if (type === "Je recherche du personnel") {
+        subject = "Merci pour votre démarche - Recherche de personnel";
+        text = `
+            Bonjour ${name} ! 
+
+            Je vous souhaite la bienvenue, merci pour votre démarche. 
+            Si vous êtes intéressé(e) par mes prestations de placement fixe, je vous invite à consulter ce lien, qui vous mènera à mes conditions générales : https://welshrecrutement.netlify.app/conditions_generales_nicolas_ballu.pdf. 
+            Si vous êtes plutôt intéressé(e) par de la location de services, ignorez ça pour le moment : je vous invite à me soumettre le nombre de travailleurs dont vous aurez besoin ainsi que la durée de leur mission, puis je prendrai rapidement contact avec vous. 
+
+            Je me réjouis de faire affaire avec vous.
+
+            Meilleures salutations.
+        `;
+    } else {
+        subject = "Merci pour votre démarche - Recherche de travail";
+        text = `
+            Bonjour ${name} ! 
+
+            Je vous souhaite la bienvenue, merci pour votre démarche. 
+            Je vais prendre contact avec vous très prochainement. 
+            Pour aller de l'avant, j'aimerais vous demander de me soumettre votre dossier complet, comportant CV, attestation/certificats de travail et diplôme. 
+            Je serais enchanté de vous aider.
+
+            Meilleures salutations.
+        `;
+    }
 
     const transporter = nodemailer.createTransport({
-        service: process.env.EMAIL_SERVICE,
+        service: 'gmail',
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
@@ -13,58 +47,35 @@ exports.handler = async (event, context) => {
 
     const mailOptions = {
         from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER, // Notification à l'admin
-        subject: 'Nouveau message de ' + name,
-        text: `Nom: ${name}\nEmail: ${email}\nNuméro de téléphone: ${phone}\nMessage: ${message}`
+        to: email,
+        subject: subject,
+        text: text,
+        attachments: attachments
     };
 
-    const responseMessagePersonnel = {
+    const notificationMailOptions = {
         from: process.env.EMAIL_USER,
-        to: email,
-        subject: 'Merci pour votre démarche',
-        html: `
-            <p>Bonjour !</p>
-            <p>Je vous souhaite la bienvenue, merci pour votre démarche.</p>
-            <p>Si vous êtes intéressé(e) par mes prestations de placement fixe, je vous invite à consulter <a href="https://welshrecrutement.netlify.app/conditions_generales_nicolas_ballu.pdf">ce lien</a>, qui vous mènera à mes conditions générales.</p>
-            <p>Si vous êtes plutôt intéressé(e) par de la location de services, ignorez ça pour le moment : je vous invite à me soumettre le nombre de travailleurs dont vous aurez besoin ainsi que la durée de leur mission, puis je prendrai rapidement contact avec vous.</p>
-            <p>Je me réjouis de faire affaire avec vous.</p>
-            <p>Meilleures salutations.</p>
-            <img src="https://welshrecrutement.netlify.app/images/image (44).png" alt="Avatar" style="width: 50px; height: 50px;">
-        `
-    };
-
-    const responseMessageTravail = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: 'Merci pour votre démarche',
-        html: `
-            <p>Bonjour !</p>
-            <p>Je vous souhaite la bienvenue, merci pour votre démarche.</p>
-            <p>Je vais prendre contact avec vous très prochainement.</p>
-            <p>Pour aller de l'avant, j'aimerais vous demander de me soumettre votre dossier complet, comportant CV, attestation/certificats de travail et diplôme.</p>
-            <p>Je serais enchanté de vous aider.</p>
-            <p>Meilleures salutations.</p>
-            <img src="https://welshrecrutement.netlify.app/images/image (44).png" alt="Avatar" style="width: 50px; height: 50px;">
+        to: process.env.EMAIL_USER,
+        subject: `Nouvelle demande: ${type}`,
+        text: `
+            Nom: ${name}
+            Email: ${email}
+            Numéro de téléphone: ${phone}
+            Message: ${message}
         `
     };
 
     try {
         await transporter.sendMail(mailOptions);
-
-        if (message === "Je recherche du personnel") {
-            await transporter.sendMail(responseMessagePersonnel);
-        } else {
-            await transporter.sendMail(responseMessageTravail);
-        }
-
+        await transporter.sendMail(notificationMailOptions);
         return {
             statusCode: 200,
-            body: JSON.stringify({ success: true })
+            body: JSON.stringify({ message: 'Email sent successfully' })
         };
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ success: false, error: error.message })
+            body: JSON.stringify({ message: `Erreur lors de l'envoi de l'email: ${error.message}` })
         };
     }
 };
