@@ -1,51 +1,59 @@
-document.addEventListener("DOMContentLoaded", function() {
+function showForm(type) {
     const formContainer = document.getElementById('form-container');
     const contactForm = document.getElementById('contact-form');
-    const showWorkButton = document.getElementById('showWork');
-    const showStaffButton = document.getElementById('showStaff');
-    
-    function showForm(type) {
-        formContainer.classList.remove('hidden');
-        contactForm.dataset.type = type;
-        document.getElementById('choice').value = type;
-    }
+    formContainer.style.display = 'block';
+    contactForm.dataset.type = type;
+}
 
-    function hideForm() {
-        formContainer.classList.add('hidden');
-        contactForm.reset();
-    }
+function hideForm() {
+    const formContainer = document.getElementById('form-container');
+    formContainer.style.display = 'none';
+    const contactForm = document.getElementById('contact-form');
+    contactForm.reset();
+}
 
-    showWorkButton.addEventListener('click', () => showForm('work'));
-    showStaffButton.addEventListener('click', () => showForm('staff'));
+document.getElementById('contact-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
 
-    contactForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
+    const formType = event.target.dataset.type;
+    const formData = new FormData(event.target);
 
-        const formData = new FormData(contactForm);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            message: formData.get('message'),
-            choice: formData.get('choice')
-        };
+    const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message'),
+        type: formType
+    };
 
-        try {
-            const response = await fetch('/.netlify/functions/sendTestEmail', {
-                method: 'POST',
-                body: JSON.stringify(data)
-            });
+    try {
+        const response = await fetch('/.netlify/functions/sendTestEmail', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-            const result = await response.json();
-            alert(result.message);
+        if (response.ok) {
+            alert('Email envoyé avec succès');
             hideForm();
-        } catch (error) {
-            alert('Erreur lors de l\'envoi de l\'email : ' + error.message);
+        } else {
+            alert('Une erreur est survenue lors de l\'envoi de l\'email');
         }
-    });
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Une erreur est survenue lors de l\'envoi de l\'email');
+    }
+});
 
-    document.addEventListener('click', function(e) {
-        if (!formContainer.contains(e.target) && !e.target.matches('button')) {
-            hideForm();
-        }
-    });
+function playMusic() {
+    const audio = document.getElementById('background-music');
+    audio.play();
+}
+
+document.addEventListener('click', function(event) {
+    const formContainer = document.getElementById('form-container');
+    if (!formContainer.contains(event.target) && formContainer.style.display === 'block') {
+        hideForm();
+    }
 });
