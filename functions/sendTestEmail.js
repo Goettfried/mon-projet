@@ -1,7 +1,24 @@
 const nodemailer = require('nodemailer');
 
 exports.handler = async function(event, context) {
-    const { name, email, message, formType } = JSON.parse(event.body);
+    let formData;
+    try {
+        formData = JSON.parse(event.body);
+    } catch (error) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ success: false, error: 'Invalid form data' })
+        };
+    }
+
+    const { name, email, message, formType } = formData;
+
+    if (!name || !email || !message || !formType) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ success: false, error: 'Missing form data' })
+        };
+    }
 
     const transporter = nodemailer.createTransport({
         service: process.env.EMAIL_SERVICE,

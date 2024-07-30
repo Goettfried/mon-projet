@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function() {
     const formContainer = document.getElementById('form-container');
     const contactForm = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
@@ -18,9 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
 
         const formData = new FormData(contactForm);
+        const formType = document.getElementById('form-type').value;
+        formData.append('formType', formType);
+
         fetch('/.netlify/functions/sendTestEmail', {
             method: 'POST',
-            body: formData
+            body: JSON.stringify(Object.fromEntries(formData))
         })
         .then(response => response.json())
         .then(data => {
