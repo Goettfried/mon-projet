@@ -9,16 +9,32 @@ function hideForm() {
     document.getElementById('form-container').style.display = 'none';
 }
 
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()\[\]\\.,;:\s@"]+\.)+[^<>()\[\]\\.,;:\s@"]{2,})$/i;
+    return re.test(String(email).toLowerCase());
+}
+
+function sanitizeInput(input) {
+    const element = document.createElement('div');
+    element.innerText = input;
+    return element.innerHTML;
+}
+
 function sendEmail(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
 
-    // Extract the form data
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const phone = formData.get('phone');
-    const message = formData.get('message');
-    const type = formData.get('type');
+    // Extract the form data and sanitize
+    const name = sanitizeInput(formData.get('name'));
+    const email = sanitizeInput(formData.get('email'));
+    const phone = sanitizeInput(formData.get('phone'));
+    const message = sanitizeInput(formData.get('message'));
+    const type = sanitizeInput(formData.get('type'));
+
+    if (!validateEmail(email)) {
+        alert('Veuillez fournir une adresse email valide.');
+        return;
+    }
 
     // Create the email content
     let emailContent = `
