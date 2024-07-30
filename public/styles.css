@@ -38,6 +38,15 @@ header .buttons button:hover {
     margin: 20px 0;
 }
 
+#services .service img {
+    filter: sepia(0.5) hue-rotate(270deg);
+    transition: filter 0.3s;
+}
+
+#services .service img:hover {
+    filter: sepia(1) hue-rotate(0deg);
+}
+
 footer {
     background-color: #005a00;
     color: white;
@@ -95,4 +104,19 @@ footer img {
 
 #contact-form form button[type="button"]:hover {
     background-color: #c9302c;
+}
+
+#music-button {
+    background-color: #007b00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 20px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+}
+
+#music-button:hover {
+    background-color: #005a00;
 }
