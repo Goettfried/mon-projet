@@ -1,122 +1,151 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #f4f4f9;
+    color: #333;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #005a00;
-    color: white;
-    padding: 20px;
+    background-color: #004d00;
+    color: #fff;
     text-align: center;
+    padding: 20px;
 }
 
-header .buttons {
-    margin-top: 20px;
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
 }
 
-header .buttons button {
-    background-color: #007b00;
-    color: white;
+header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: normal;
+}
+
+header p {
+    margin: 10px 0;
+}
+
+.form-button {
+    background-color: #008000;
+    color: #fff;
     border: none;
     padding: 10px 20px;
-    margin: 5px;
+    margin: 10px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-header .buttons button:hover {
-    background-color: #005a00;
+.form-button:hover {
+    background-color: #006600;
 }
 
-#services, #testimonials {
+#form-container {
+    background-color: #fff;
     padding: 20px;
-    text-align: center;
+    margin: 20px auto;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-#services .service, #testimonials blockquote {
-    margin: 20px 0;
-}
-
-#services .service img {
-    filter: sepia(0.5) hue-rotate(270deg);
-    transition: filter 0.3s;
-}
-
-#services .service img:hover {
-    filter: sepia(1) hue-rotate(0deg);
-}
-
-footer {
-    background-color: #005a00;
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
-
-footer img {
-    width: 20px;
-    vertical-align: middle;
-}
-
-#contact-form {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-#contact-form.hidden {
-    display: none;
-}
-
-#contact-form form {
+#form-container form {
     display: flex;
     flex-direction: column;
 }
 
-#contact-form form label,
-#contact-form form input,
-#contact-form form textarea {
-    margin: 10px 0;
-}
-
-#contact-form form button {
-    background-color: #007b00;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+#form-container label {
     margin-top: 10px;
 }
 
-#contact-form form button[type="button"] {
-    background-color: #d9534f;
+#form-container input,
+#form-container textarea {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-#contact-form form button:hover {
-    background-color: #005a00;
-}
-
-#contact-form form button[type="button"]:hover {
-    background-color: #c9302c;
-}
-
-#music-button {
-    background-color: #007b00;
-    color: white;
+#form-container button {
+    background-color: #008000;
+    color: #fff;
     border: none;
-    padding: 10px 20px;
-    margin: 20px;
+    padding: 10px;
+    margin-top: 20px;
     cursor: pointer;
-    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+#form-container button:hover {
+    background-color: #006600;
+}
+
+#form-response {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+.services {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.service {
     text-align: center;
 }
 
-#music-button:hover {
-    background-color: #005a00;
+.service img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+.service img:hover {
+    transform: scale(1.05);
+}
+
+.testimonials {
+    background-color: #e4e4e4;
+    padding: 20px;
+    text-align: center;
+}
+
+.testimonials h3 {
+    margin-top: 0;
+}
+
+footer {
+    background-color: #004d00;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer button {
+    background-color: #008000;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+footer button:hover {
+    background-color: #006600;
+}
+
+#background-music {
+    display: none;
 }
