@@ -7,38 +7,73 @@ function hideForm() {
     document.getElementById('contact-form').classList.add('hidden');
 }
 
-function toggleMusic() {
-    var music = document.getElementById('background-music');
-    var button = document.getElementById('music-button');
-    if (music.paused) {
-        music.play();
-        button.textContent = 'Arrêter la musique';
-    } else {
-        music.pause();
-        button.textContent = 'Écouter de la musique';
-    }
+function hideFormSuccess() {
+    document.getElementById('form-success').classList.add('hidden');
+    hideForm();
 }
 
-async function sendEmail(event) {
+function sendEmail(event) {
     event.preventDefault();
-    const form = event.target;
-    const formData = new FormData(form);
-    const data = {};
-    formData.forEach((value, key) => (data[key] = value));
-    try {
-        const response = await fetch('/.netlify/functions/sendTestEmail', {
-            method: 'POST',
-            body: JSON.stringify(data)
-        });
-        const result = await response.json();
-        if (response.ok) {
-            alert('Email envoyé avec succès!');
-            hideForm();
-            form.reset();
+    const formType = document.getElementById('form-type').value;
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    fetch('/.netlify/functions/sendEmail', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ formType, name, email, message }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('form-success').classList.remove('hidden');
         } else {
-            alert('Erreur lors de l\'envoi de l\'email: ' + result.error);
+            alert('Erreur lors de l\'envoi de l\'email');
         }
-    } catch (error) {
-        alert('Erreur lors de l\'envoi de l\'email: ' + error.message);
-    }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Erreur lors de l\'envoi de l\'email');
+    });
 }
+
+let musicPlaying = false;
+function toggleMusic() {
+    const music = document.getElementById('background-music');
+    const musicButton = document.getElementById('music-button');
+    if (musicPlaying) {
+        music.pause();
+        musicButton.textContent = 'Écouter de la musique';
+    } else {
+        music.play();
+        musicButton.textContent = 'Arrêter la musique';
+    }
+    musicPlaying = !musicPlaying;
+}
+
+// Adding ARIA roles and properties for accessibility
+document.querySelectorAll('button').forEach(button => {
+    button.setAttribute('role', 'button');
+    button.setAttribute('aria-pressed', 'false');
+    button.addEventListener('click', () => {
+        button.setAttribute('aria-pressed', button.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+    });
+});
+
+document.querySelectorAll('a').forEach(anchor => {
+    anchor.setAttribute('role', 'link');
+});
+
+// Real-time validation for email input
+document.getElementById('email').addEventListener('input', function(event) {
+    const emailField = event.target;
+    const emailValue = emailField.value;
+    if (!emailValue.includes('@') || !emailValue.includes('.')) {
+        emailField.setCustomValidity('Veuillez entrer une adresse e-mail valide.');
+    } else {
+        emailField.setCustomValidity('');
+    }
+});
