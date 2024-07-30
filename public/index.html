@@ -1,71 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicolas BALLU - Consultant en Recrutement Indépendant</title>
+    <title>Nicolas BALLU - Consultant en Recrutement Indépendant (S.R.I.)</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
+
 <body>
     <header>
         <h1>Nicolas BALLU</h1>
-        <p>Spécialiste du Recrutement Indépendant (S.R.I.)</p>
+        <h2>Spécialiste du Recrutement Indépendant (S.R.I.)</h2>
+        <p>"Je connais bien Vaud, j'habite en Chablais. J'ai eu le privilège et la joie de me distinguer dans le secteur de l'industrie et du placement fixe de cadres techniques, marqués par une approche entrepreneuriale, de gérer de manière autonome la création et l'implémentation de processus de recrutement, de gérer les aspects sociaux d'entreprises par des actions de médiation sociale, et d'intégrer des bureaux d'études du canton. Mes récents référents sont typiquement des bureaux d'ingénieurs-conseils/bureaux d'études et des entreprises vaudoises, genevoises, fribourgeoises et valaisannes spécialisées dans la production, la distribution et la commercialisation d'électricité, ainsi que dans le développement de solutions énergétiques durables et innovantes. Ils ont choisi de se donner corps et âme à la transition énergétique et de s'acharner à nous obtenir l'efficience énergétique, oui, pour vous et moi : le contribuable, en faveur de notre avenir à tous, du mien, et du vôtre."</p>
+        <button onclick="toggleForm('workForm')">Je recherche du travail</button>
+        <button onclick="toggleForm('personnelForm')">Je recherche du personnel</button>
     </header>
-    <main>
-        <section class="intro">
-            <p>"Je connais bien Vaud, j'habite en Chablais. J’ai eu le privilège et la joie de me distinguer dans le secteur de l'aluminium et de l'hydroélectricité, notamment dans les recrutements de cadres techniques. Marqué par une approche entrepreneuriale, je gère de manière autonome la création et le développement de solutions énergétiques durables et innovantes. Mes clients sont typiquement des bureaux d’ingénieurs-conseils/bureaux d'études et des entreprises vaudoises, genevoises, fribourgeoises et valaisannes spécialisées dans la production, la distribution et la commercialisation d’électricité, ainsi que des cabinets d’avocats spécialisés en droit des entreprises en difficultés. Ils ont choisi de se donner corps et âme à la transition énergétique et de s'acharner à nous obtenir l'efficience énergétique, oui, pour vous et moi : le contribuable ; en faveur de notre avenir à tous, du mien, et du vôtre."</p>
-            <p>"Je propose des prestations de placement de personnel fixe et temporaire, quelque soit votre secteur. Vous aurez l'occasion de me communiquer votre besoin en cliquant sur l'un de ces deux onglets. Au plaisir de vous accompagner dans votre quête !"</p>
-            <div class="buttons">
-                <button id="job-seeker-btn">Je recherche du travail</button>
-                <button id="employer-btn">Je recherche du personnel</button>
-            </div>
-        </section>
-        <section id="form-container">
-            <form id="contact-form">
-                <label for="name">Nom:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" required></textarea>
-                <input type="hidden" id="responseMessage" name="responseMessage">
-                <button type="submit">Envoyer</button>
-            </form>
-        </section>
-        <section class="services">
-            <h2>Mes Services</h2>
-            <div class="service">
-                <img src="images/image1.jpg" alt="Service 1">
-                <p>Placement de personnel fixe<br>Je vous trouve les bons candidats pour vos besoins spécifiques.</p>
-            </div>
-            <div class="service">
-                <img src="images/image2.jpg" alt="Service 2">
-                <p>Location de services<br>Solution flexible pour vos besoins temporaires.</p>
-            </div>
-        </section>
-        <section class="testimonials">
-            <h2>Témoignages</h2>
-            <p>"C'est la première fois que je me suis senti compris et apprécié à ma juste valeur dans une entreprise et c'est grâce à vous." - H.S., Responsable de Projets Électricité</p>
-            <p>"Encore merci pour votre investissement." - D.S., Modeleur BIM Électricité</p>
-            <p>"Au plaisir d’avoir travaillé avec toi et je pense que l’on va se revoir." - G.C., Chef de Projet Tableaux Électriques</p>
-            <p>"Je tiens à vous exprimer ma sincère gratitude. Je vous remercie encore pour cette opportunité et je suis impatient de commencer ce nouveau chapitre." - A.A., Responsable de Projets, Ingénieur Métrologue</p>
-        </section>
-        <section class="audio-control">
-            <audio id="background-music" controls loop>
-                <source src="music/background.mp3" type="audio/mpeg">
-                Votre navigateur ne supporte pas l'élément audio.
-            </audio>
-        </section>
-    </main>
+
+    <section id="services">
+        <h2>Mes Services</h2>
+        <div class="service">
+            <img src="images/service1.jpg" alt="Service 1">
+            <h3>Placement de personnel fixe</h3>
+            <p>Nous trouvons le bon candidat pour vos besoins spécifiques.</p>
+        </div>
+        <div class="service">
+            <img src="images/service2.jpg" alt="Service 2">
+            <h3>Location de services</h3>
+            <p>Solution flexible pour vos besoins temporaires.</p>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <h2>Témoignages</h2>
+        <div class="testimonial">
+            <p>"C'était fantastique de voir à quel point Nicolas est rapide et réactif. Je le recommande vivement à toute entreprise qui a besoin de grands talents." - A.S.</p>
+        </div>
+        <div class="testimonial">
+            <p>"Nicolas nous a trouvé les meilleurs candidats en un rien de temps." - B.T.</p>
+        </div>
+        <div class="testimonial">
+            <p>"Sa connaissance du marché et son réseau sont inégalés." - G.C.</p>
+        </div>
+        <div class="testimonial">
+            <p>"Je n'ai jamais vu quelqu'un travailler avec autant de passion et de détermination. Nicolas est un atout incroyable." - N.A.</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contactez-moi</h2>
+        <form id="contactForm" onsubmit="sendEmail(event)">
+            <label for="name">Nom:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+
     <footer>
         <p>&copy; 2024 Nicolas Ballu</p>
-        <div class="social-media">
-            <a href="https://www.linkedin.com/in/nicolasballu" target="_blank">
-                <img src="images/linkedin.png" alt="LinkedIn">
-                <span>LinkedIn</span>
-            </a>
-        </div>
+        <a href="https://www.linkedin.com/in/nicolas-ballu" target="_blank">
+            <img src="images/linkedin-icon.png" alt="LinkedIn">
+            LinkedIn
+        </a>
     </footer>
-    <script src="scripts.js"></script>
 </body>
+
 </html>

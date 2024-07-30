@@ -1,83 +1,43 @@
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
 header {
+    text-align: center;
     background-color: #004d00;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-}
-
-.intro {
-    background-color: #e0e0e0;
-    color: #333;
+    color: #fff;
     padding: 20px;
-    text-align: center;
 }
 
-.buttons {
-    text-align: center;
-    margin: 20px 0;
-}
-
-button {
-    background-color: #006400;
-    color: white;
+header button {
+    background-color: #008000;
+    color: #fff;
     border: none;
     padding: 10px 20px;
-    margin: 5px;
+    margin: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #004d00;
+header button:hover {
+    background-color: #005500;
 }
 
-#form-container {
-    text-align: center;
-    margin: 20px 0;
-}
-
-form {
-    display: inline-block;
-    text-align: left;
-}
-
-label, input, textarea {
-    display: block;
-    margin: 10px 0;
-    width: 100%;
-}
-
-input, textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-textarea {
-    resize: none;
-}
-
-.services, .testimonials {
-    margin: 20px;
+section {
+    padding: 20px;
     text-align: center;
 }
 
 .service {
-    margin: 20px 0;
+    display: inline-block;
+    margin: 20px;
 }
 
 .service img {
-    width: 100%;
-    max-width: 600px;
-    border-radius: 10px;
+    width: 300px;
+    height: 200px;
     transition: transform 0.3s;
 }
 
@@ -85,45 +45,25 @@ textarea {
     transform: scale(1.05);
 }
 
-.audio-control {
-    text-align: center;
-    margin: 20px 0;
-}
-
 footer {
     background-color: #004d00;
-    color: white;
+    color: #fff;
     text-align: center;
     padding: 10px;
-}
-
-footer .social-media {
-    margin: 10px 0;
-}
-
-footer .social-media img {
-    width: 40px;
-    height: 40px;
-}
-
-footer .social-media span {
-    display: block;
-    font-size: 12px;
-    color: #006400;
-}
-
-body::before {
-    content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #f0f4c3 25%, transparent 25%) -50px 0,
-                linear-gradient(225deg, #f0f4c3 25%, transparent 25%) -50px 0,
-                linear-gradient(315deg, #f0f4c3 25%, transparent 25%),
-                linear-gradient(45deg, #f0f4c3 25%, #f4f4f4 25%);
-    background-size: 100px 100px;
-    pointer-events: none;
-    z-index: -1;
+    width: 100%;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+}
+
+footer a img {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
 }
