@@ -1,76 +1,51 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Gestionnaire de soumission du formulaire de contact
-    document.getElementById('contact-form').addEventListener('submit', async function(event) {
-        event.preventDefault();
+document.addEventListener("DOMContentLoaded", function() {
+    const formContainer = document.getElementById('form-container');
+    const contactForm = document.getElementById('contact-form');
+    const showWorkButton = document.getElementById('showWork');
+    const showStaffButton = document.getElementById('showStaff');
+    
+    function showForm(type) {
+        formContainer.classList.remove('hidden');
+        contactForm.dataset.type = type;
+        document.getElementById('choice').value = type;
+    }
 
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
-        const type = this.dataset.type;
+    function hideForm() {
+        formContainer.classList.add('hidden');
+        contactForm.reset();
+    }
 
-        if (!name || !email || !message) {
-            alert('Veuillez remplir tous les champs.');
-            return;
-        }
+    showWorkButton.addEventListener('click', () => showForm('work'));
+    showStaffButton.addEventListener('click', () => showForm('staff'));
 
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
         const data = {
-            name: name,
-            email: email,
-            message: message,
-            type: type
+            name: formData.get('name'),
+            email: formData.get('email'),
+            message: formData.get('message'),
+            choice: formData.get('choice')
         };
-
-        console.log('Sending data:', data);
 
         try {
             const response = await fetch('/.netlify/functions/sendTestEmail', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
                 body: JSON.stringify(data)
             });
 
-            if (!response.ok) {
-                const result = await response.json();
-                throw new Error(result.error || 'Erreur inconnue');
-            }
-
             const result = await response.json();
-            alert('Email envoyé avec succès : ' + result.message);
+            alert(result.message);
+            hideForm();
         } catch (error) {
             alert('Erreur lors de l\'envoi de l\'email : ' + error.message);
         }
     });
 
-    // Fonction pour afficher le formulaire de contact
-    function showForm(type) {
-        console.log('Showing form for:', type);
-        document.getElementById('form-container').style.display = 'block';
-        document.getElementById('contact-form').dataset.type = type;
-    }
-
-    // Ajouter des écouteurs d'événements aux boutons pour afficher le formulaire
-    document.getElementById('showWork').addEventListener('click', function() {
-        showForm('work');
-    });
-
-    document.getElementById('showStaff').addEventListener('click', function() {
-        showForm('staff');
-    });
-
-    // Fonction pour jouer de la musique
-    function playMusic() {
-        const audio = document.getElementById('background-music');
-        if (audio.paused) {
-            audio.play();
-            console.log('Playing music');
-        } else {
-            audio.pause();
-            console.log('Pausing music');
+    document.addEventListener('click', function(e) {
+        if (!formContainer.contains(e.target) && !e.target.matches('button')) {
+            hideForm();
         }
-    }
-
-    // Ajouter un écouteur d'événement au bouton de lecture de musique
-    document.querySelector('.audio-control button').addEventListener('click', playMusic);
+    });
 });

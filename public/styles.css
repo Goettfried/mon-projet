@@ -1,86 +1,101 @@
-/* Styles existants */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
 
 header {
-    background-color: #006400;
+    background: #006400;
     color: #fff;
     padding: 20px;
     text-align: center;
+}
+
+h1, h2 {
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
+.main {
+    padding: 20px;
 }
 
 .buttons {
     text-align: center;
-    margin: 20px;
+    margin-bottom: 20px;
 }
 
-.buttons button {
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-    background-color: #006400;
+button {
+    background: #006400;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #004d00;
 }
 
 #form-container {
-    position: fixed;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 300px;
     background: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 8px 0 0 8px;
+    border: 1px solid #ccc;
     padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
     display: none;
-    transition: transform 0.3s ease;
 }
 
-#form-container.open {
+#form-container.hidden {
+    display: none;
+}
+
+label {
     display: block;
+    margin-bottom: 5px;
 }
 
-#form-container label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-#form-container input,
-#form-container textarea {
-    width: 100%;
+input, textarea {
+    width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
-#form-container button[type="submit"],
-#form-container button[type="button"] {
-    background-color: #006400;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-#form-container button[type="button"] {
-    background-color: #8B0000; /* Red background for cancel button */
-}
-
-#form-container textarea {
-    resize: none; /* Disable resizing */
+textarea {
+    resize: none;
 }
 
 .service {
     text-align: center;
-    margin: 20px;
+    padding: 10px;
 }
 
-.testimonials {
-    background: #f9f9f9;
-    padding: 20px;
+.service img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #006400;
+    border-radius: 4px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.service img:hover {
+    transform: scale(1.05);
+    filter: hue-rotate(90deg);
 }
 
 .testimonial {
