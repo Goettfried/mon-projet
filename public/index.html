@@ -1,73 +1,68 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicolas BALLU - Consultant en Recrutement Indépendant (S.R.I.)</title>
+    <title>Site de Nicolas Ballu</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
-
 <body>
     <header>
         <h1>Nicolas BALLU</h1>
-        <h2>Spécialiste du Recrutement Indépendant (S.R.I.)</h2>
-        <p>"Je connais bien Vaud, j'habite en Chablais. J'ai eu le privilège et la joie de me distinguer dans le secteur de l'industrie et du placement fixe de cadres techniques, marqués par une approche entrepreneuriale, de gérer de manière autonome la création et l'implémentation de processus de recrutement, de gérer les aspects sociaux d'entreprises par des actions de médiation sociale, et d'intégrer des bureaux d'études du canton. Mes récents référents sont typiquement des bureaux d'ingénieurs-conseils/bureaux d'études et des entreprises vaudoises, genevoises, fribourgeoises et valaisannes spécialisées dans la production, la distribution et la commercialisation d'électricité, ainsi que dans le développement de solutions énergétiques durables et innovantes. Ils ont choisi de se donner corps et âme à la transition énergétique et de s'acharner à nous obtenir l'efficience énergétique, oui, pour vous et moi : le contribuable, en faveur de notre avenir à tous, du mien, et du vôtre."</p>
-        <button onclick="toggleForm('workForm')">Je recherche du travail</button>
-        <button onclick="toggleForm('personnelForm')">Je recherche du personnel</button>
+        <h2>Spécialiste du Recrutement Indépendant (S.R.I)</h2>
+        <p>"Je connais bien Vaud, j'habite en Chablais. J'ai eu le privilège et la chance de me distinguer dans la conduite et l'influence de l'industrie, notamment dans le recrutement de cadres techniques. Marqué par une approche entrepreneuriale, je gère de manière autonome la création de nouveaux bureaux et le recrutement de personnel fixe et temporaire dans les entreprises suisses et romandes. J'aide également les entreprises à réussir leur transition énergétique."</p>
+        <div>
+            <button onclick="showForm('travail')">Je recherche du travail</button>
+            <button onclick="showForm('personnel')">Je recherche du personnel</button>
+        </div>
     </header>
 
     <section id="services">
         <h2>Mes Services</h2>
-        <div class="service">
-            <img src="images/service1.jpg" alt="Service 1">
-            <h3>Placement de personnel fixe</h3>
+        <div>
+            <img src="images/service1.jpg" alt="Service 1" onmouseover="changeImage(this, 'images/service1_hover.jpg')" onmouseout="changeImage(this, 'images/service1.jpg')">
+            <p>Placement de personnel fixe</p>
             <p>Nous trouvons le bon candidat pour vos besoins spécifiques.</p>
         </div>
-        <div class="service">
-            <img src="images/service2.jpg" alt="Service 2">
-            <h3>Location de services</h3>
-            <p>Solution flexible pour vos besoins temporaires.</p>
+        <div>
+            <img src="images/service2.jpg" alt="Service 2" onmouseover="changeImage(this, 'images/service2_hover.jpg')" onmouseout="changeImage(this, 'images/service2.jpg')">
+            <p>Location de services</p>
+            <p>Solutions flexibles pour vos besoins temporaires.</p>
         </div>
     </section>
 
     <section id="testimonials">
         <h2>Témoignages</h2>
-        <div class="testimonial">
-            <p>"C'était fantastique de voir à quel point Nicolas est rapide et réactif. Je le recommande vivement à toute entreprise qui a besoin de grands talents." - A.S.</p>
-        </div>
-        <div class="testimonial">
-            <p>"Nicolas nous a trouvé les meilleurs candidats en un rien de temps." - B.T.</p>
-        </div>
-        <div class="testimonial">
-            <p>"Sa connaissance du marché et son réseau sont inégalés." - G.C.</p>
-        </div>
-        <div class="testimonial">
-            <p>"Je n'ai jamais vu quelqu'un travailler avec autant de passion et de détermination. Nicolas est un atout incroyable." - N.A.</p>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2>Contactez-moi</h2>
-        <form id="contactForm" onsubmit="sendEmail(event)">
-            <label for="name">Nom:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-            <button type="submit">Envoyer</button>
-        </form>
+        <p>"C'était vraiment super de travailler avec Nicolas, il comprend vite et agit avec efficacité." - J.D.</p>
+        <p>"Je recommande Nicolas à toute entreprise qui cherche à améliorer ses processus de recrutement." - M.C.</p>
+        <p>"Nicolas est très professionnel et toujours à l'écoute de nos besoins." - A.L.</p>
     </section>
 
     <footer>
-        <p>&copy; 2024 Nicolas Ballu</p>
-        <a href="https://www.linkedin.com/in/nicolas-ballu" target="_blank">
-            <img src="images/linkedin-icon.png" alt="LinkedIn">
-            LinkedIn
+        <p>© 2024 Nicolas Ballu</p>
+        <a href="https://www.linkedin.com/in/nicolas-ballu/" target="_blank">
+            <img src="images/linkedin.png" alt="LinkedIn">
+            <span>LinkedIn</span>
         </a>
     </footer>
-</body>
 
+    <div id="contact-form" class="hidden">
+        <form id="form">
+            <label for="name">Nom:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            
+            <input type="hidden" id="form-type" name="form-type">
+            <button type="submit">Envoyer</button>
+        </form>
+        <button onclick="hideForm()">Fermer</button>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
 </html>
