@@ -1,14 +1,17 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    color: #333333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
   }
   
   header {
     background-color: #2c6d2e;
     color: white;
     text-align: center;
-    padding: 20px 0;
+    padding: 10px 0;
   }
   
   header h1 {
@@ -100,6 +103,7 @@ body {
     max-width: 100%;
     height: auto;
     display: block;
+    filter: hue-rotate(120deg) saturate(0.5);
   }
   
   .testimonials {
@@ -135,4 +139,5 @@ body {
   footer button:hover {
     opacity: 0.9;
   }
+  
   

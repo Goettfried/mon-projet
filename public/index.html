@@ -9,20 +9,20 @@
 <body>
   <header>
     <h1>Nicolas BALLU</h1>
-    <p>Spécialiste du Recrutement Indépendant (S.R.I)</p>
+    <p>Spécialiste du Recrutement Indépendant (S.R.I.)</p>
   </header>
   <section class="description">
-    <p>Je suis Nicolas Ballu, S.R.I. au bénéfice de <strong>deux ans d’expérience</strong> en <strong>Suisse Romande 🇨🇭</strong> </p>
-    <p><strong>"Je connais bien Vaud, j'habite en Chablais.</strong> J’ai eu le privilège et la joie de me distinguer dans le secteur du <strong>bâtiment et de l'industrie</strong>, notamment dans le <strong>recrutement de cadres techniques</strong>. Marqué par une approche <strong>entrepreneuriale</strong>, je gère de manière autonome la création et le développement de <strong>portefeuilles clients</strong> tout en m’appliquant à maintenir l'<strong>engagement fort</strong> rendant le mieux compte des <strong>aspects sociaux du recrutement</strong>, autrement, je ne serais qu'un placeur comme les autres."</p>
-    <p>Mon but 💡: <strong>Optimiser la communication entre les entreprises et les talents exceptionnels</strong>, par le prisme du <strong>placement de personnel privé</strong>, de la <strong>location de services</strong> et de la <strong>médiation sociale</strong> pour rétablir le dialogue, particulièrement appréciable en temps de crise. Mes clients référents sont typiquement des bureaux d'ingénieurs-conseils/bureaux d'études et des entreprises vaudoises, genevoises, fribourgeoises et valaisannes spécialisées dans la production, la distribution et la commercialisation d'électricité, ainsi que dans le développement de solutions énergétiques durables et innovantes. Ils ont choisi de se donner corps et âme à la transition énergétique et de s’acharner à nous obtenir l'efficience énergétique, oui, pour vous et moi : le contribuable ; en faveur de notre avenir à tous, du mien, et du vôtre.</p>
+    <p>Je suis Nicolas Ballu, S.R.I. au bénéfice de <strong>deux ans d’expérience</strong> en <strong>Suisse Romande</strong> </p>
+    <p><strong>Je connais bien Vaud, j'habite en Chablais.</strong> J’ai eu le privilège et la joie de me distinguer dans le secteur du <strong>bâtiment et de l'industrie</strong>, notamment dans le <strong>recrutement de cadres techniques</strong>. Marqué par une approche <strong>entrepreneuriale</strong>, je gère de manière autonome la création et le développement de <strong>portefeuilles clients</strong> tout en m’appliquant à maintenir l'<strong>engagement fort</strong> rendant le mieux compte des <strong>aspects sociaux du recrutement</strong>, autrement, je ne serais qu'un placeur comme les autres.</p>
+    <p>Mon but 💡 : <strong>Optimiser la communication entre les entreprises et les talents exceptionnels</strong>, par le prisme du <strong>placement de personnel privé</strong>, de la <strong>location de services</strong> et de la <strong>médiation sociale</strong> pour rétablir le dialogue, particulièrement appréciable en temps de crise. Mes clients référents sont typiquement des bureaux d'ingénieurs-conseils/bureaux d'études et des entreprises vaudoises, genevoises, fribourgeoises et valaisannes spécialisées dans la production, la distribution et la commercialisation d'électricité, ainsi que dans le développement de solutions énergétiques durables et innovantes. Ils ont choisi de se donner corps et âme à la transition énergétique et de s’acharner à nous obtenir l'efficience énergétique, oui, pour vous et moi : le contribuable ; en faveur de notre avenir à tous, du mien, et du vôtre.</p>
     <p>Je propose des prestations de <strong>placement de personnel fixe et temporaire</strong>, quelque soit votre secteur. Vous aurez l’occasion de me communiquer votre besoin en cliquant sur l’un de ces deux onglets.</p>
     <p>Au plaisir de vous accompagner dans votre quête !</p>
   </section>
-  <section class="buttons">
-    <button onclick="showForm('work')">Je recherche du travail</button>
-    <button onclick="showForm('hire')">Je recherche du personnel</button>
-  </section>
-  <section id="form-container" style="display:none;">
+  <div class="buttons">
+    <button onclick="showForm('travail')">Je recherche du travail</button>
+    <button onclick="showForm('personnel')">Je recherche du personnel</button>
+  </div>
+  <div id="form-container" style="display:none;">
     <form id="contact-form">
       <label for="name">Nom:</label>
       <input type="text" id="name" name="name" required>
@@ -35,32 +35,34 @@
       <button type="submit">Envoyer</button>
       <button type="button" onclick="hideForm()">Annuler</button>
     </form>
-  </section>
+  </div>
   <section class="services">
     <div class="service">
-      <img src="images/20240221_152031.jpg" alt="Placement de personnel fixe" style="filter: hue-rotate(90deg) saturate(150%); width: 100%;">
-      <p>Placement de personnel fixe</p>
+      <img src="images/20240221_152031.jpg" alt="Placement de personnel fixe">
+      <h2>Placement de personnel fixe</h2>
       <p>Je trouve le bon candidat pour vos besoins spécifiques.</p>
     </div>
     <div class="service">
-      <img src="images/20240217_082717.jpg" alt="Location de services" style="filter: hue-rotate(90deg) saturate(150%); width: 100%;">
-      <p>Location de services</p>
+      <img src="images/20240217_082717.jpg" alt="Location de services">
+      <h2>Location de services</h2>
       <p>Solutions flexibles pour vos besoins intérim.</p>
     </div>
   </section>
   <section class="testimonials">
     <h2>Témoignages</h2>
     <p>"C'est la première fois que je me suis senti compris et apprécié à ma juste valeur dans une entreprise et c'est grâce à vous." - H.S.</p>
-    <p>"Je recommande Nicolas à toute entreprise qui cherche à améliorer ses processus de recrutement." - M.C.</p>
-    <p>"Le calme et la rigueur avec lesquels Nicolas aborde chaque recrutement nous apportent entière satisfaction." - R.D.</p>
-    <p>"Je suis très satisfaite des services globaux, je vous remercie encore pour cette opportunité qui m'a permis de commencer en douceur à Châtel." - A.A.</p>
+    <p>"Je recommande Nicolas à toute entreprise qui cherche à améliorer ses processus de recrutement." - J.D.</p>
+    <p>"Nicolas m'a aidé à trouver un poste qui correspond parfaitement à mes compétences et à mes aspirations professionnelles." - M.C.</p>
+    <p>"Sa connaissance du secteur et sa capacité à comprendre mes besoins ont fait toute la différence." - G.B.</p>
   </section>
   <footer>
     <p>© 2024 Nicolas Ballu</p>
-    <a href="https://www.linkedin.com/in/baal-nicolas/"><img src="images/image.png" alt="LinkedIn" class="linkedin-icon"></a>
+    <a href="https://www.linkedin.com/in/baal-nicolas/">
+      <img src="images/image (44).png" alt="LinkedIn" class="linkedin-icon"> LinkedIn
+    </a>
     <button onclick="playPauseMusic()">Écouter de la musique</button>
+    <audio id="background-music" src="music/bert_kaempfert.mp3" loop></audio>
   </footer>
-  <audio id="background-music" src="music/bert_kaempfert.mp3" loop></audio>
   <script src="scripts.js"></script>
 </body>
 </html>

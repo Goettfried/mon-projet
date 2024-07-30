@@ -14,47 +14,49 @@ function showForm(option) {
     event.preventDefault();
   
     const form = event.target;
+    const option = form.getAttribute('data-option');
+    const formData = new FormData(form);
     const data = {
-      name: form.name.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      message: form.message.value,
-      option: form.getAttribute('data-option')
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      message: formData.get('message'),
+      option: option
     };
   
     try {
       const response = await fetch('/.netlify/functions/sendTestEmail', {
         method: 'POST',
         body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
   
-      const result = await response.json();
-  
       if (response.ok) {
-        alert('Email envoyé avec succès !');
+        alert('Email envoyé avec succès!');
         form.reset();
         hideForm();
       } else {
-        alert(`Erreur lors de l'envoi de l'email: ${result.error}`);
+        alert('Erreur lors de l\'envoi de l\'email: ' + response.statusText);
       }
     } catch (error) {
-      alert(`Erreur lors de l'envoi de l'email: ${error.message}`);
+      alert('Erreur lors de l\'envoi de l\'email: ' + error.message);
     }
   });
   
   document.addEventListener('click', function (event) {
     const formContainer = document.getElementById('form-container');
-    const target = event.target;
-    if (!formContainer.contains(target) && formContainer.style.display === 'block') {
+    if (!formContainer.contains(event.target) && formContainer.style.display === 'block') {
       hideForm();
     }
   });
   
   function playPauseMusic() {
-    const audio = document.getElementById('background-music');
-    if (audio.paused) {
-      audio.play();
+    const music = document.getElementById('background-music');
+    if (music.paused) {
+      music.play();
     } else {
-      audio.pause();
+      music.pause();
     }
   }  
