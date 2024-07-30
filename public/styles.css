@@ -9,6 +9,7 @@ body {
 header {
     text-align: center;
     padding: 20px;
+    background: linear-gradient(to bottom, #004d00, #003300);
 }
 
 .buttons {
@@ -22,11 +23,12 @@ header {
     color: #fff;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .buttons button:hover {
     background-color: #004d00;
+    transform: scale(1.05);
 }
 
 #form-container {
@@ -51,6 +53,11 @@ header {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+#form-container input:focus, #form-container textarea:focus {
+    border-color: #006600;
 }
 
 #form-container button {
@@ -60,17 +67,19 @@ header {
     color: #fff;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 #form-container button:hover {
     background-color: #004d00;
+    transform: scale(1.05);
 }
 
 #services {
     display: flex;
     justify-content: center;
     padding: 20px;
+    background: linear-gradient(to bottom, #004d00, #003300);
 }
 
 .service {
@@ -89,6 +98,7 @@ header {
 
 .service img:hover {
     transform: scale(1.05);
+    filter: grayscale(0) sepia(0) hue-rotate(0) saturate(100%);
 }
 
 #testimonials {
@@ -101,6 +111,8 @@ header {
     font-style: italic;
     margin: 10px auto;
     max-width: 600px;
+    border-left: 5px solid #006600;
+    padding-left: 10px;
 }
 
 footer {
