@@ -84,6 +84,11 @@ header {
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
+    filter: hue-rotate(90deg); /* Appliquer une teinte verte */
+}
+
+#location-service-img {
+    filter: hue-rotate(180deg); /* Appliquer une teinte mauve rosâtre */
 }
 
 .service img:hover {
