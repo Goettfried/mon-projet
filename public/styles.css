@@ -1,49 +1,45 @@
 /* styles.css */
 
+/* Basic styling */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
-    color: #000000;
 }
 
 header {
+    background-color: #004d00;
+    color: white;
+    padding: 20px;
     text-align: center;
-    background-color: #006400;
-    color: #ffffff;
-    padding: 20px 0;
 }
 
 header h1 {
-    font-size: 36px;
     margin: 0;
 }
 
 header h2 {
-    font-size: 24px;
     margin: 0;
+    font-weight: normal;
 }
 
 header p {
     margin: 10px 0;
 }
 
-main {
-    padding: 20px;
-}
-
 .buttons {
     text-align: center;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .buttons button {
-    background-color: #006400;
-    color: #ffffff;
-    border: none;
     padding: 10px 20px;
     margin: 10px;
+    background-color: #006400;
+    color: white;
+    border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -53,152 +49,103 @@ main {
 }
 
 #form-container {
-    display: none;
-    text-align: center;
-}
-
-#contact-form {
-    display: inline-block;
-    text-align: left;
-    border: 1px solid #006400;
+    background-color: white;
+    border: 1px solid #ddd;
     padding: 20px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
+    max-width: 600px;
+    margin: 20px auto;
+    display: none;
 }
 
-#contact-form label {
+#form-container label {
     display: block;
-    margin-bottom: 5px;
+    margin: 10px 0 5px;
 }
 
-#contact-form input,
-#contact-form textarea {
-    width: 100%;
+#form-container input,
+#form-container textarea {
+    width: calc(100% - 22px);
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-#contact-form button {
+#form-container button {
     background-color: #006400;
-    color: #ffffff;
+    color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-#contact-form button:hover {
+#form-container button:hover {
     background-color: #004d00;
 }
 
 .services {
     text-align: center;
-    margin-top: 20px;
+    margin: 40px 0;
 }
 
-.service {
+.services h2 {
+    color: #006400;
+}
+
+.services .service {
     display: inline-block;
     margin: 20px;
+    width: calc(50% - 40px);
+    vertical-align: top;
 }
 
-.service img {
-    max-width: 100%;
-    border: 2px solid #006400;
-    transition: filter 0.3s ease;
+.services .service img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
 }
 
-.service img:hover {
-    filter: hue-rotate(90deg);
-}
-
-.service h3 {
-    margin: 10px 0 5px;
-}
-
-.service p {
-    margin: 0;
+.services .service img:hover {
+    transform: scale(1.05);
 }
 
 .testimonials {
+    background-color: #004d00;
+    color: white;
+    padding: 20px;
     text-align: center;
-    margin-top: 20px;
 }
 
-.testimonial {
-    display: inline-block;
-    margin: 20px;
-    max-width: 300px;
-    border: 1px solid #006400;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
+.testimonials h2 {
+    margin-top: 0;
+}
+
+.testimonials .testimonial {
+    margin: 20px auto;
+    max-width: 600px;
 }
 
 .audio-control {
     text-align: center;
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
-.audio-control button {
-    background-color: #006400;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.audio-control button:hover {
-    background-color: #004d00;
+audio {
+    display: none;
 }
 
 footer {
     text-align: center;
-    padding: 20px;
-    background-color: #006400;
-    color: #ffffff;
+    padding: 10px;
+    background-color: #004d00;
+    color: white;
 }
 
 footer .social-media {
     margin-top: 10px;
 }
 
-footer .social-media a {
-    display: inline-block;
-    margin: 0 10px;
-    color: #ffffff;
-}
-
 footer .social-media img {
     width: 30px;
     height: 30px;
-}
-
-footer .social-media span {
-    display: block;
-    font-size: 12px;
-    color: #ffffff;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.service img {
-    animation: fadeIn 2s;
-}
-
-button {
-    animation: fadeIn 1s;
-}
-
-#contact-form {
-    animation: fadeIn 1s;
 }
