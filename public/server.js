@@ -1,16 +1,15 @@
 const express = require('express');
 const rateLimit = require('express-rate-limit');
-const helmet = require('helmet');
-const xssClean = require('xss-clean');
 const bodyParser = require('body-parser');
+const sendEmail = require('./functions/sendTestEmail');
+const helmet = require('helmet');
+const xss = require('xss-clean');
 const { check, validationResult } = require('express-validator');
-const sendEmail = require('./sendTestEmail');
 
 const app = express();
 
-// Middleware de sécurité
 app.use(helmet());
-app.use(xssClean());
+app.use(xss());
 
 // Limitation de taux
 const limiter = rateLimit({
@@ -24,9 +23,9 @@ app.use('/api/', limiter); // Appliquer la limitation de taux uniquement à l'AP
 app.use(bodyParser.json());
 
 app.post('/api/send-email', [
-  check('name').notEmpty().withMessage('Le nom est requis'),
-  check('email').isEmail().withMessage('Email invalide'),
-  check('message').notEmpty().withMessage('Le message est requis'),
+  check('name').not().isEmpty().withMessage('Le nom est requis'),
+  check('email').isEmail().withMessage("L'email doit être valide"),
+  check('message').not().isEmpty().withMessage('Le message est requis')
 ], (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
